@@ -11,14 +11,15 @@ import {
     query,
     onSnapshot,
     orderBy,
-  
+
   } from 'firebase/firestore';
   import db from "./firebaseConfig/firebaseConfig.js"
 
 
 export default function ChatContainer() {
-  
-    let socketio  = socketIOClient("http://localhost:5001")
+    const PORT = 5001;
+    console.log('PORT[log]::', PORT)
+    let socketio  = socketIOClient(`http://localhost:${PORT}`)
     const [chats , setChats] = useState([])
     const [user, setUser] = useState(localStorage.getItem("user"))
     const avatar = localStorage.getItem('avatar')
@@ -26,7 +27,7 @@ export default function ChatContainer() {
     const messagesEndRef = useRef(null)
     const scrollToBottom = () => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-    }    
+    }
 
     useEffect(() => {
       scrollToBottom()
@@ -42,7 +43,7 @@ export default function ChatContainer() {
     useEffect(()=>{
 
         const q = query(chatsRef , orderBy('createdAt' , 'asc'))
-      
+
         const unsub = onSnapshot(q, (querySnapshot) =>{
           const fireChats =[]
           querySnapshot.forEach(doc => {
@@ -53,7 +54,7 @@ export default function ChatContainer() {
         return ()=> {
           unsub()
         }
-      
+
       },[])
 
      function addToFirrebase(chat){
@@ -68,8 +69,8 @@ export default function ChatContainer() {
         setDoc(chatRef , newChat)
         .then(()=> console.log('Chat added succesfully'))
         .catch(console.log)
-     } 
-   
+     }
+
 
     function sendChatToSocket(chat){
         socketio.emit("chat" , chat)
@@ -85,7 +86,7 @@ export default function ChatContainer() {
     function logout(){
         localStorage.removeItem("user")
         localStorage.removeItem("avatar")
-        setUser("")   
+        setUser("")
     }
 
     function ChatsList(){
@@ -98,7 +99,7 @@ export default function ChatContainer() {
               }
                <div ref={messagesEndRef} />
         </div>)
-       
+
     }
 
   return (
@@ -106,25 +107,19 @@ export default function ChatContainer() {
         {
         user ?
          <div>
-        
+
          <div style={{display:'flex', flexDirection:"row", justifyContent: 'space-between'}} >
           <h4>Username: {user}</h4>
-          <strong>Remember to Subscribe to  <a href='https://www.youtube.com/channel/UCmoQtgmJ2SHEAPCAR1Q8TBA'> My Channel</a></strong>
           <p onClick={()=> logout()} style={{color:"blue", cursor:'pointer'}} >Log Out</p>
            </div>
             <ChatsList
              />
-            
+
             <InputText addMessage={addMessage} />
         </div>
         : <UserLogin setUser={setUser} />
         }
-
-    <div style={{margin:10 , display:'flex', justifyContent:'center'}} >
-    <small style={{backgroundColor:'lightblue' , padding:5 , borderRadius:5}} >Interested in some 1 on 1 Coding Tutorials and Mentorship. Lets chat on Discord: <strong> kutlo_sek#5370 </strong></small>
-        
-    </div>
-     
+      <div className="developed-by">Developed by: Narek & Hayk</div>
     </div>
   )
 }

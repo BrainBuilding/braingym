@@ -26,13 +26,15 @@ const styles = {
   },
 };
 
-export default function InputText({ addMessage }) {
+type Props = {
+  addMessage: (message: string) => void;
+};
+
+export const InputText: React.FC<Props> = ({ addMessage }) => {
   const [message, setMessage] = useState("");
 
   function addAMessage() {
-    addMessage({
-      message,
-    });
+    addMessage(message);
     setMessage("");
   }
 
@@ -50,4 +52,4 @@ export default function InputText({ addMessage }) {
       </button>
     </div>
   );
-}
+};

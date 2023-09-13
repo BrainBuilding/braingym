@@ -14,7 +14,9 @@ const button = {
   margin: 10,
 };
 
-export default function UserLogin({ setUser }) {
+type Props = { setUser: React.Dispatch<React.SetStateAction<string | null>> };
+
+export const UserLogin: React.FC<Props> = ({ setUser }) => {
   const [user, setAUser] = useState("");
 
   function handleSetUser() {
@@ -54,4 +56,4 @@ export default function UserLogin({ setUser }) {
       </div>
     </div>
   );
-}
+};

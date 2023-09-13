@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import socketIOClient from "socket.io-client";
-import ChatBoxReciever, { ChatBoxSender } from "./ChatBox";
-import InputText from "./InputText";
-import UserLogin from "./UserLogin";
+import { ChatBoxReciever, ChatBoxSender } from "./ChatBox";
+import { InputText } from "./InputText";
+import { UserLogin } from "./UserLogin";
 import {
   doc,
   setDoc,
@@ -13,15 +13,16 @@ import {
   orderBy,
 } from "firebase/firestore";
 import db from "./firebaseConfig/firebaseConfig.js";
+import { TChatData } from "../types";
 
 export default function ChatContainer() {
   const PORT = 5001;
   let socketio = socketIOClient(`http://localhost:${PORT}`);
-  const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState<TChatData[]>([]);
   const [user, setUser] = useState(localStorage.getItem("user"));
-  const avatar = localStorage.getItem("avatar");
+  const avatar = localStorage.getItem("avatar") as string;
   const chatsRef = collection(db, "Messages");
-  const messagesEndRef = useRef(null);
+  const messagesEndRef = useRef<null | HTMLDivElement>(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -40,23 +41,23 @@ export default function ChatContainer() {
     const q = query(chatsRef, orderBy("createdAt", "asc"));
 
     const unsub = onSnapshot(q, (querySnapshot) => {
-      const fireChats = [];
+      const fireChats: TChatData[] = [];
       querySnapshot.forEach((doc) => {
-        fireChats.push(doc.data());
+        fireChats.push(doc.data() as TChatData);
       });
       setChats([...fireChats]);
     });
     return () => {
       unsub();
     };
-  }, []);
+  }, [chatsRef]);
 
-  function addToFirrebase(chat) {
+  function addToFirrebase(message: string) {
     const newChat = {
       avatar,
       createdAt: serverTimestamp(),
       user,
-      message: chat.message,
+      message,
     };
 
     const chatRef = doc(chatsRef);
@@ -65,24 +66,34 @@ export default function ChatContainer() {
       .catch(console.log);
   }
 
-  function sendChatToSocket(chat) {
+  function sendChatToSocket(chat: TChatData[]) {
+    console.log("chat[log]::", chat);
+
     socketio.emit("chat", chat);
   }
 
-  function addMessage(chat) {
-    const newChat = { ...chat, user: localStorage.getItem("user"), avatar };
-    addToFirrebase(chat);
-    setChats([...chats, newChat]);
-    sendChatToSocket([...chats, newChat]);
-  }
+  const addMessage = (message: string) => {
+    const loggedInUser = localStorage.getItem("user");
 
-  function logout() {
+    if (loggedInUser && avatar) {
+      const newChat: TChatData = {
+        message,
+        user: loggedInUser,
+        avatar,
+      };
+      addToFirrebase(message);
+      setChats([...chats, newChat]);
+      sendChatToSocket([...chats, newChat]);
+    }
+  };
+
+  const logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("avatar");
     setUser("");
-  }
+  };
 
-  function ChatsList() {
+  const ChatsList = () => {
     return (
       <div style={{ height: "75vh", overflow: "scroll", overflowX: "hidden" }}>
         {chats.map((chat, index) => {
@@ -107,7 +118,7 @@ export default function ChatContainer() {
         <div ref={messagesEndRef} />
       </div>
     );
-  }
+  };
 
   return (
     <div>

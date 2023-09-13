@@ -1,7 +1,8 @@
 import React from "react";
 import { Avatar, Image } from "antd";
+import { TChatData } from "../types";
 
-export default function ChatBoxReciever({ avatar, user, message }) {
+export const ChatBoxReciever = ({ avatar, user, message }: TChatData) => {
   return (
     <div
       style={{
@@ -38,9 +39,9 @@ export default function ChatBoxReciever({ avatar, user, message }) {
       </p>
     </div>
   );
-}
+};
 
-export function ChatBoxSender({ avatar, user, message }) {
+export function ChatBoxSender({ avatar, user, message }: TChatData) {
   return (
     <div
       style={{

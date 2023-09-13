@@ -1,4 +1,4 @@
-import ChatContainer from "./components/ChatContainer.js";
+import ChatContainer from "./components/ChatContainer";
 
 function App() {
   return (

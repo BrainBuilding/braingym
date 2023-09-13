@@ -135,7 +135,7 @@ export default function ChatContainer() {
       ) : (
         <UserLogin setUser={setUser} />
       )}
-      <div className="developed-by">Developed by: Narek & Hayk</div>
+      <div className="developed-by">Developed by Narek & Hayk</div>
     </div>
   );
 }

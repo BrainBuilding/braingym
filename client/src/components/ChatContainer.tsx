@@ -1,8 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import socketIOClient from "socket.io-client";
-import { ChatBoxReciever, ChatBoxSender } from "./ChatBox";
-import { InputText } from "./InputText";
-import { UserLogin } from "./UserLogin";
 import {
   doc,
   setDoc,
@@ -12,16 +9,18 @@ import {
   onSnapshot,
   orderBy,
 } from "firebase/firestore";
-import db from "./firebaseConfig/firebaseConfig.js";
-import { TChatData } from "../types";
+import { fireDB } from "configs/firebaseConfig";
+import { UserAuth } from "context/AuthContext";
+import { TChatData } from "types";
+import { ChatBoxReciever, ChatBoxSender } from "./ChatBox";
+import { InputText } from "./InputText";
 
 export default function ChatContainer() {
   const PORT = 5001;
   let socketio = socketIOClient(`http://localhost:${PORT}`);
   const [chats, setChats] = useState<TChatData[]>([]);
-  const [user, setUser] = useState(localStorage.getItem("user"));
-  const avatar = localStorage.getItem("avatar") as string;
-  const chatsRef = collection(db, "Messages");
+  const { user } = UserAuth();
+  const chatsRef = useMemo(() => collection(fireDB, "Messages"), []);
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -54,9 +53,9 @@ export default function ChatContainer() {
 
   function addToFirrebase(message: string) {
     const newChat = {
-      avatar,
+      avatar: user?.photoURL,
       createdAt: serverTimestamp(),
-      user,
+      user: user?.displayName,
       message,
     };
 
@@ -73,31 +72,24 @@ export default function ChatContainer() {
   }
 
   const addMessage = (message: string) => {
-    const loggedInUser = localStorage.getItem("user");
-
-    if (loggedInUser && avatar) {
+    if (user) {
       const newChat: TChatData = {
         message,
-        user: loggedInUser,
-        avatar,
+        user: user?.displayName as string,
+        avatar: user?.photoURL as string,
       };
+
       addToFirrebase(message);
       setChats([...chats, newChat]);
       sendChatToSocket([...chats, newChat]);
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("avatar");
-    setUser("");
-  };
-
   const ChatsList = () => {
     return (
       <div style={{ height: "75vh", overflow: "scroll", overflowX: "hidden" }}>
         {chats.map((chat, index) => {
-          if (chat.user === user)
+          if (chat.user === user?.displayName)
             return (
               <ChatBoxSender
                 key={index}
@@ -122,30 +114,23 @@ export default function ChatContainer() {
 
   return (
     <div>
-      {user ? (
-        <div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <h4>Username: {user}</h4>
-            <p
-              onClick={() => logout()}
-              style={{ color: "blue", cursor: "pointer" }}
-            >
-              Log Out
-            </p>
-          </div>
-          <ChatsList />
-
-          <InputText addMessage={addMessage} />
+      <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <h4>
+            <>Username: {user?.displayName}</>
+          </h4>
         </div>
-      ) : (
-        <UserLogin setUser={setUser} />
-      )}
+        <ChatsList />
+
+        <InputText addMessage={addMessage} />
+      </div>
+
       <div className="developed-by">Developed by Narek & Hayk</div>
     </div>
   );

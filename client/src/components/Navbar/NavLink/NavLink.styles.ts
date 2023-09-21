@@ -22,16 +22,17 @@ export const NavLinkStyled = styled.div`
     font-size: ${fontSizes.lg};
     color: ${colors.white};
     position: relative;
+    justify-content: center;
 
     &.active {
       &::before {
         display: block;
-        content: '';
+        content: "";
         border-bottom: 2px solid ${colors.white};
-        width: calc(100% - ${spaces.lg});
+        width: calc(100% - ${spaces.xl});
         position: absolute;
-        left: ${spaces.sm};
-        bottom: ${spaces.md};
+        left: ${spaces.lg};
+        bottom: ${spaces.xs};
       }
     }
   }

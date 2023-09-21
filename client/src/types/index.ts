@@ -8,4 +8,12 @@ export type TChatData = {
 
 export type TRequiredField<T, K extends keyof T> = T & Required<Pick<T, K>>;
 
-export type TUser = User & { photoURL: string, displayName: string };
+export type TUser = User & { photoURL: string; displayName: string };
+
+export type TLetter = {
+  key: string;
+  value: {
+    uppercase: string;
+    lowercase: string;
+  };
+};

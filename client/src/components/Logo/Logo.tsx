@@ -1,5 +1,10 @@
 export const Logo = () => {
-    return (
-        <img className="logo" src="/images/logo.png" alt="" />
-    )
-}
+  return (
+    <img
+      referrerPolicy="no-referrer"
+      className="logo"
+      src="/images/logo.png"
+      alt=""
+    />
+  );
+};

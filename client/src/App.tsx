@@ -6,6 +6,7 @@ import { Navbar } from "components/Navbar";
 import { Protected } from "components/Protected";
 import { Account } from "pages/Account";
 import { SignIn } from "pages/SignIn";
+import { Alphabet } from "pages/Alphabet";
 
 function App() {
   return (
@@ -28,6 +29,14 @@ function App() {
               element={
                 <Protected>
                   <Account />
+                </Protected>
+              }
+            />
+            <Route
+              path="/alphabet"
+              element={
+                <Protected>
+                  <Alphabet />
                 </Protected>
               }
             />

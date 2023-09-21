@@ -10,7 +10,7 @@ export const Account = () => {
         <p>Welcome, {user?.displayName}</p>
 
         {user?.photoURL && (
-          <img style={{width: 100, height: 100}} src={user?.photoURL} />
+          <img alt="Profile" style={{width: 100, height: 100}} src={user?.photoURL} />
         )}
       </div>
     </div>

@@ -1,20 +1,22 @@
 import { useContext, createContext, useEffect, useState } from "react";
 import { signOut, onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "configs/firebaseConfig";
+import { TUser } from "types";
 
 type Props = {
   children: JSX.Element;
 };
+
 type TAuthContext = {
   isAuthCheckPending: boolean;
   logOut: () => Promise<void>;
-  user: User | null;
+  user: TUser | null;
 };
 
 const AuthContext = createContext<TAuthContext>({} as TAuthContext);
 
 export const AuthContextProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<TUser | null>(null);
   const [isPending, setIsPending] = useState(true);
 
   const logOut = () => signOut(auth);
@@ -22,7 +24,7 @@ export const AuthContextProvider = ({ children }: Props) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setIsPending(false);
-      setUser(currentUser);
+      setUser(currentUser as TUser);
     });
     return () => {
       unsubscribe();

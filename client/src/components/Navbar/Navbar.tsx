@@ -1,5 +1,8 @@
+import { Logo } from "components/Logo";
+import { NavLink } from "components/Navbar/NavLink";
 import { UserAuth } from "context/AuthContext";
-import { Link } from "react-router-dom";
+import { NavbarStyled } from "./Navbar.styles";
+import { Avatar } from "components/Avatar";
 
 export const Navbar = () => {
   const { user, logOut } = UserAuth();
@@ -13,13 +16,15 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between bg-gray-200 w-full p-4">
-      <h1 className="text-center text-2xl font-bold">BrainBuilding</h1>
+    <NavbarStyled className="nav-bar">
+      <Logo />
 
-      <Link to="/account">Account</Link>
-      <Link to="/">Chat</Link>
-
-      {user && <button onClick={handleSignOut}>Logout</button>}
-    </div>
+      <div className="nav-bar-buttons">
+        <NavLink to="/">Chat</NavLink>
+        <NavLink to="/account">Account</NavLink>
+        {user && <button onClick={handleSignOut}>Logout</button>}
+        {user && <Avatar user={user} />}
+      </div>
+    </NavbarStyled>
   );
 };

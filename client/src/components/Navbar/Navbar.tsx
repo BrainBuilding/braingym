@@ -22,7 +22,7 @@ export const Navbar = () => {
       <div className="nav-bar-buttons">
         <NavLink to="/">Chat</NavLink>
         <NavLink to="/account">Account</NavLink>
-        {user && <button onClick={handleSignOut}>Logout</button>}
+        {user && <button onClick={handleSignOut}>Log-out</button>}
         {user && <Avatar user={user} />}
       </div>
     </NavbarStyled>

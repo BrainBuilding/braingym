@@ -1,20 +1,17 @@
 import styled from "styled-components";
 import { colors, spaces } from "styles";
 
-export const NavbarStyled = styled.div`
-  height: 50px;
+export const SubNavbarStyled = styled.div`
+  height: 40px;
   background: ${colors.main};
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 0 ${spaces.lg};
+  border-top: 1px solid ${colors.secondary};
 
   .nav-bar-buttons {
     display: flex;
-    height: 100%;
-  }
-
-  .logo {
     height: 100%;
   }
 `;

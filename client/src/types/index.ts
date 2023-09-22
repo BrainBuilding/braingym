@@ -17,3 +17,7 @@ export type TLetter = {
     lowercase: string;
   };
 };
+
+export type TNavItem = React.PropsWithChildren<{
+  to: string;
+}>;

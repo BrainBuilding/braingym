@@ -1,9 +1,8 @@
 import { NavLink as NavLinkReact } from "react-router-dom";
 import { NavLinkStyled } from "./NavLink.styles";
+import { TNavItem } from "types";
 
-type TProps = React.PropsWithChildren<{
-  to: string;
-}>;
+type TProps = TNavItem;
 
 export const NavLink = (props: TProps) => {
   return (

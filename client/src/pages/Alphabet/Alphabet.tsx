@@ -1,4 +1,5 @@
 import { letters } from "constants/alphabet/armenian";
+import { useCubeSizes } from "./Alphabet.hooks";
 import { AlphabetStyled } from "./Alphabet.styles";
 
 export const Alphabet = () => {
@@ -7,8 +8,10 @@ export const Alphabet = () => {
     return () => audio.play();
   };
 
+  const sizes = useCubeSizes();
+
   return (
-    <AlphabetStyled className="alphabet">
+    <AlphabetStyled className="alphabet" sizes={sizes}>
       <h1>Learn Alphabet</h1>
 
       <div className="grid-container letters-container">

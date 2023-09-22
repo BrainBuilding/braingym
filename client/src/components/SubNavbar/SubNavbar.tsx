@@ -13,7 +13,7 @@ export const SubNavbar: React.FC<Props> = (props) => {
     <SubNavbarStyled className="nav-bar">
       <div className="nav-bar-buttons">
         {items.map((item) => (
-          <NavLink {...item} />
+          <NavLink key={`key-${item.to}`} {...item} />
         ))}
       </div>
     </SubNavbarStyled>

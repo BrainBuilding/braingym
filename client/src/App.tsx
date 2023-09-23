@@ -12,58 +12,56 @@ import { PlayAlphabet } from "pages/Alphabet/pages/PlayAlphabet";
 
 function App() {
   return (
-    <div>
-      <AuthContextProvider>
-        <>
-          <Navbar />
-          <Routes>
+    <AuthContextProvider>
+      <>
+        <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Protected>
+                <ChatContainer />
+              </Protected>
+            }
+          />
+          <Route path="/log-in" element={<LogIn />} />
+          <Route
+            path="/account"
+            element={
+              <Protected>
+                <Account />
+              </Protected>
+            }
+          />
+          <Route
+            path="/alphabet"
+            element={
+              <Protected>
+                <Alphabet />
+              </Protected>
+            }
+          >
+            <Route index element={<Navigate to="learn" replace={true} />} />
             <Route
-              path="/"
+              path="learn"
               element={
                 <Protected>
-                  <ChatContainer />
+                  <LearnAlphabet />
                 </Protected>
               }
             />
-            <Route path="/log-in" element={<LogIn />} />
             <Route
-              path="/account"
+              path="play"
               element={
                 <Protected>
-                  <Account />
+                  <PlayAlphabet />
                 </Protected>
               }
             />
-            <Route
-              path="/alphabet"
-              element={
-                <Protected>
-                  <Alphabet />
-                </Protected>
-              }
-            >
-              <Route index element={<Navigate to="learn" replace={true} />} />
-              <Route
-                path="learn"
-                element={
-                  <Protected>
-                    <LearnAlphabet />
-                  </Protected>
-                }
-              />
-              <Route
-                path="play"
-                element={
-                  <Protected>
-                    <PlayAlphabet />
-                  </Protected>
-                }
-              />
-            </Route>
-          </Routes>
-        </>
-      </AuthContextProvider>
-    </div>
+          </Route>
+        </Routes>
+      </>
+    </AuthContextProvider>
   );
 }
 

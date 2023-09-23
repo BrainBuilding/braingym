@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { UserAuth } from "context/AuthContext";
 import { GoogleButton } from "components/GoogleButton";
+import { LogInStyled } from "./LogIn.styles";
 
 export const LogIn = () => {
   const { user } = UserAuth();
@@ -12,16 +13,33 @@ export const LogIn = () => {
     if (user != null) {
       navigate("/account");
     }
-  }, [user]);
+  }, [user, navigate]);
 
   console.log("user2[log]::", user);
 
   return (
-    <div>
-      <h1 className="text-center text-3xl font-bold py-8">Sign in</h1>
-      <div className="max-w-[240px] m-auto py-4">
-        <GoogleButton />
+    <LogInStyled>
+      <div className="background-wrapper"></div>
+
+      <div className="photos-wrapper">
+        <img src="/images/log-in/books.png" alt="" />
+
+        <img src="/images/log-in/owl.png" alt="" />
       </div>
-    </div>
+
+      <div className="log-in-frame">
+        <div>
+          <div className="welcome">
+            <span>Պատ</span>
+            <span>րաստ</span>
+            <span>վիր </span>
+            <span>դպ</span>
+            <span>րո</span>
+            <span>ցին</span>
+          </div>
+          <GoogleButton />
+        </div>
+      </div>
+    </LogInStyled>
   );
 };

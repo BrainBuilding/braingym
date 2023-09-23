@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { colors } from "styles";
 
-const color1 = '#ceeefd';
-const color2 = '#60bdc4';
+const color1 = "#ceeefd";
+const color2 = "#60bdc4";
 
 export const LogInStyled = styled.div`
   height: 100%;
@@ -16,17 +16,30 @@ export const LogInStyled = styled.div`
     top: -50%;
     left: -25%;
     z-index: -1;
-    background: repeating-linear-gradient(-45deg, ${color1} 0%, ${color1} 20%, ${color2} 20%, ${color2} 40%, ${color1} 40%, ${color1} 60%, ${color2} 60%, ${color2} 80%, ${color1} 80%, ${color1} 100%);
+    background: repeating-linear-gradient(
+      -45deg,
+      ${color1} 0%,
+      ${color1} 20%,
+      ${color2} 20%,
+      ${color2} 40%,
+      ${color1} 40%,
+      ${color1} 60%,
+      ${color2} 60%,
+      ${color2} 80%,
+      ${color1} 80%,
+      ${color1} 100%
+    );
   }
-  
+
   .photos-wrapper {
     width: 100%;
     position: absolute;
     bottom: 0;
     display: flex;
     justify-content: space-around;
+    z-index: -1;
 
-    img{
+    img {
       width: 25%;
       max-width: 300px;
     }
@@ -49,7 +62,7 @@ export const LogInStyled = styled.div`
         margin-top: -24%;
         margin-bottom: 24%;
 
-        span{
+        span {
           &:nth-child(1) {
             color: ${colors.secondary};
           }
@@ -76,7 +89,5 @@ export const LogInStyled = styled.div`
         }
       }
     }
-
-
   }
-`
+`;

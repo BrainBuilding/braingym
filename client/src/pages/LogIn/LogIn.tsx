@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { UserAuth } from "context/AuthContext";
 import { GoogleButton } from "components/GoogleButton";
 
-export const SignIn = () => {
+export const LogIn = () => {
   const { user } = UserAuth();
   const navigate = useNavigate();
 

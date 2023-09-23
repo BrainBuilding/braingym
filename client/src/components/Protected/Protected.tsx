@@ -12,7 +12,7 @@ export const Protected: Props = (props) => {
   }
 
   if (!user) {
-    return <Navigate to="/sign-in" />;
+    return <Navigate to="/log-in" />;
   }
 
   return <>{children}</>;

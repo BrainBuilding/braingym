@@ -5,7 +5,7 @@ import { AuthContextProvider } from "context/AuthContext";
 import { Navbar } from "components/Navbar";
 import { Protected } from "components/Protected";
 import { Account } from "pages/Account";
-import { SignIn } from "pages/SignIn";
+import { LogIn } from "pages/LogIn";
 import { Alphabet } from "pages/Alphabet";
 import { LearnAlphabet } from "pages/Alphabet/pages/LearnAlphabet";
 import { PlayAlphabet } from "pages/Alphabet/pages/PlayAlphabet";
@@ -25,7 +25,7 @@ function App() {
                 </Protected>
               }
             />
-            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/log-in" element={<LogIn />} />
             <Route
               path="/account"
               element={

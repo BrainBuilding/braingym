@@ -1,8 +1,10 @@
 const express = require("express");
 const http = require("http");
+
 const Server = require("socket.io").Server;
 const path = require("path");
 const cors = require("cors");
+const authMiddleWare = require("./middlewares/auth").authMiddleWare;
 
 const app = express();
 
@@ -13,6 +15,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
+app.use(authMiddleWare.decodeToken);
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -28,7 +31,6 @@ app.use(express.static(buildPath));
 
 app.get("/api/user-details/:userId", function (req, res) {
   res.send(JSON.stringify(req.params));
-  app.next();
 });
 
 app.get("/*", function (req, res) {

@@ -7,6 +7,20 @@ type SavedRequest = {
   guid: string;
 };
 
+const auth = {
+  token: window.localStorage.getItem("token"),
+};
+
+const getToken = () => {
+  if (auth.token) {
+    return auth.token;
+  }
+
+  auth.token = window.localStorage.getItem("token");
+
+  return auth.token;
+};
+
 export class api {
   /*
    * #### "INTERNAL DDOS"
@@ -104,6 +118,7 @@ export class api {
       // Persists the location including the part after the #. Used for throwing exceptions and stuff.
       "x-ref-location": window.location.toString(),
       credentials: "include",
+      Authorization: `Bearer ${getToken()}`,
     };
 
     const defaultOptions = {

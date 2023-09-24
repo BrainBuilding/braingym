@@ -19,13 +19,16 @@ export const AuthContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<TUser | null>(null);
   const [isPending, setIsPending] = useState(true);
 
-  const logOut = () => signOut(auth);
+  const logOut = () => {
+    window.localStorage.setItem("token", "");
+    return signOut(auth);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      currentUser
-        ?.getIdToken()
-        .then((tokenId) => console.log("tokenId[log]::", tokenId));
+      currentUser?.getIdToken().then((tokenId) => {
+        window.localStorage.setItem("token", tokenId);
+      });
 
       setIsPending(false);
       setUser(currentUser as TUser);

@@ -1,6 +1,6 @@
-const admin = require("firebase-admin");
+import admin from "firebase-admin";
 
-const serviceAccount = require("./serviceAccountKey.json");
+import serviceAccount from "../../serviceAccountKey.json";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -8,4 +8,4 @@ admin.initializeApp({
     "https://brainbuildingapp-default-rtdb.europe-west1.firebasedatabase.app",
 });
 
-module.exports = { admin };
+export { admin };

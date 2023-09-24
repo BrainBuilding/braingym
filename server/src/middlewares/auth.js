@@ -1,4 +1,4 @@
-const { admin } = require("../config/firebase.config");
+import { admin } from "../config/firebase.config";
 
 class AuthMiddleWare {
   async decodeToken(req, res, next) {
@@ -23,4 +23,4 @@ class AuthMiddleWare {
 
 const authMiddleWare = new AuthMiddleWare();
 
-module.exports = { authMiddleWare };
+export { authMiddleWare };

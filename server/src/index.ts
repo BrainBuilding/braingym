@@ -1,11 +1,11 @@
-const express = require("express");
-const http = require("http");
+import express from "express";
+import http from "http";
 
-const Server = require("socket.io").Server;
-const path = require("path");
-const cors = require("cors");
-const authMiddleWare = require("./middlewares/auth").authMiddleWare;
-const ProfileDB = require("./models/Profile").ProfileDB;
+import { Server } from "socket.io";
+import path from "path";
+import cors from "cors";
+import { authMiddleWare } from "./middlewares/auth";
+import { ProfileDB } from "./models/Profile";
 
 const app = express();
 
@@ -32,7 +32,7 @@ const buildPath = path.join(_dirname, "../client/build");
 app.use(express.static(buildPath));
 
 app.get("/api/user-details/:userId", function (req, res) {
-  res.send(JSON.stringify(req.params));
+  res.send(JSON.stringify({ ...req.params, ts: true }));
 });
 
 app.post("/api/profiles", async function (req, res) {

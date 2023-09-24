@@ -1,4 +1,4 @@
-const { admin } = require("../../config/firebase.config");
+import { admin } from "../../config/firebase.config";
 
 class Profile {
   db = admin.firestore().collection("Profiles");
@@ -46,4 +46,4 @@ class Profile {
 
 const ProfileDB = new Profile();
 
-module.exports = { ProfileDB };
+export { ProfileDB };

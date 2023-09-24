@@ -23,6 +23,10 @@ export const AuthContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      currentUser
+        ?.getIdToken()
+        .then((tokenId) => console.log("tokenId[log]::", tokenId));
+
       setIsPending(false);
       setUser(currentUser as TUser);
     });

@@ -1,8 +1,18 @@
 const express = require("express");
 const http = require("http");
 const Server = require("socket.io").Server;
-const app = express();
 const path = require("path");
+const cors = require("cors");
+
+const app = express();
+
+const corsOptions = {
+  origin: ["http://localhost:3000"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -18,6 +28,7 @@ app.use(express.static(buildPath));
 
 app.get("/api/user-details/:userId", function (req, res) {
   res.send(JSON.stringify(req.params));
+  app.next();
 });
 
 app.get("/*", function (req, res) {

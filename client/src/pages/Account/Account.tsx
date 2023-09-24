@@ -1,7 +1,15 @@
 import { UserAuth } from "context/AuthContext";
+import { useEffect } from "react";
+import { api } from "api";
 
 export const Account = () => {
   const { user } = UserAuth();
+
+  useEffect(() => {
+    api.get("user-details/5").then((res) => {
+      console.log("res[log]::", res);
+    });
+  }, []);
 
   return (
     <div className="w-[300px] m-auto">

@@ -5,6 +5,7 @@ const Server = require("socket.io").Server;
 const path = require("path");
 const cors = require("cors");
 const authMiddleWare = require("./middlewares/auth").authMiddleWare;
+const ProfileDB = require("./models/Profile").ProfileDB;
 
 const app = express();
 
@@ -16,6 +17,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 app.use(authMiddleWare.decodeToken);
+app.use(express.json());
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -31,6 +33,17 @@ app.use(express.static(buildPath));
 
 app.get("/api/user-details/:userId", function (req, res) {
   res.send(JSON.stringify(req.params));
+});
+
+app.post("/api/profiles", async function (req, res) {
+  const data = req.body;
+
+  const dbRes = await ProfileDB.addProfileIfNotExist(
+    data.uid,
+    data.profile.profile
+  );
+
+  res.send(JSON.stringify(dbRes));
 });
 
 app.get("/*", function (req, res) {

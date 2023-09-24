@@ -12,7 +12,7 @@ class AuthMiddleWare {
         return res.json({ message: "Unauthorized" });
       }
     } catch (error) {
-      return res.json({ message: "Server Error" });
+      return res.json({ message: "Server Error", error });
     }
   }
 }

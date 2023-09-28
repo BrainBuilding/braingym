@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, spaces } from "styles";
+import { colors, fontSizes, spaces } from "styles";
 
 export const NavbarStyled = styled.div`
   height: 50px;
@@ -12,6 +12,18 @@ export const NavbarStyled = styled.div`
   .nav-bar-buttons {
     display: flex;
     height: 100%;
+
+
+    .log-out-button {
+      background: #3da2f3;
+      border: none;
+      color: ${colors.white};
+      font-size: ${fontSizes.lg};
+
+      &:hover {
+        background: ${colors.secondary};
+      }
+    }
   }
 
   .logo {

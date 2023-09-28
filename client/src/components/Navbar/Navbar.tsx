@@ -23,7 +23,7 @@ export const Navbar = () => {
         <NavLink to="/">Chat</NavLink>
         <NavLink to="/account">Account</NavLink>
         <NavLink to="/alphabet">Alphabet</NavLink>
-        {user && <button onClick={handleSignOut}>Logout</button>}
+        {user && <button className="log-out-button" onClick={handleSignOut}>Logout</button>}
         {user && <Avatar user={user} />}
       </div>
     </NavbarStyled>

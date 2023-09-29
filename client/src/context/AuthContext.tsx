@@ -31,8 +31,8 @@ export const AuthContextProvider = ({ children }: Props) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) {
-        localStore.setData("token", "");
-        localStore.setData("user", "");
+        localStore.deleteData("token");
+        localStore.deleteData("user");
         setIsPending(false);
       }
 

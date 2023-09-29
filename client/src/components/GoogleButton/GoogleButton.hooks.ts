@@ -11,7 +11,7 @@ export const useSignInWithGoogle = () => {
         createProfileIfNewUser(user);
       })
       .catch((error) => {
-        console.log("error[log]::", error);
+        console.error("error[log]::", error);
       });
   }, []);
 

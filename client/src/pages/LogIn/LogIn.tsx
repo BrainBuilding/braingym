@@ -15,8 +15,6 @@ export const LogIn = () => {
     }
   }, [user, navigate]);
 
-  console.log("user2[log]::", user);
-
   return (
     <LogInStyled>
       <div className="background-wrapper"></div>

@@ -7,8 +7,8 @@ export const Avatar = (props: Props) => {
     <img
       referrerPolicy="no-referrer"
       className="avatar"
-      title={props.user.displayName}
-      src={props.user.photoURL}
+      title={`${props.user.first_name} ${props.user.last_name}`}
+      src={props.user.picture}
       alt="Avatar"
     />
   );

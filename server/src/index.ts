@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request } from "express";
 import http from "http";
 
 import { Server } from "socket.io";
@@ -6,6 +6,7 @@ import path from "path";
 import cors from "cors";
 import { authMiddleWare } from "./middlewares/auth";
 import { ProfileDB } from "./models/Profile";
+import { UserInfo } from "firebase-admin/auth";
 
 const app = express();
 
@@ -31,9 +32,17 @@ const buildPath = path.join(_dirname, "../client/build");
 
 app.use(express.static(buildPath));
 
-app.get("/api/user-details/:userId", function (req, res) {
-  res.send(JSON.stringify({ ...req.params, ts: true }));
-});
+app.get(
+  "/api/user-details",
+  async function (
+    req: Request<{}, any, any, any, Record<string, any>> & { user: UserInfo },
+    res
+  ) {
+    const dbRes = await ProfileDB.getProfile(req.user.uid);
+
+    res.send(JSON.stringify({ user: dbRes, ts: true }));
+  }
+);
 
 app.post("/api/profiles", async function (req, res) {
   const data = req.body;

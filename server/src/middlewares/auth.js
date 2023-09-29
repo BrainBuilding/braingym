@@ -11,6 +11,7 @@ class AuthMiddleWare {
       const authUser = await admin.auth().verifyIdToken(token);
 
       if (authUser) {
+        req.user = authUser;
         next();
       } else {
         return res.json({ message: "Unauthorized" });

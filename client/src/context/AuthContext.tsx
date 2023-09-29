@@ -2,6 +2,8 @@ import { useContext, createContext, useEffect, useState } from "react";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "configs/firebaseConfig";
 import { TUser } from "types";
+import { api } from "api";
+import { localStore } from "utils";
 
 type Props = {
   children: JSX.Element;
@@ -20,18 +22,27 @@ export const AuthContextProvider = ({ children }: Props) => {
   const [isPending, setIsPending] = useState(true);
 
   const logOut = () => {
-    window.localStorage.setItem("token", "");
+    localStore.deleteData("token");
+    localStore.deleteData("user");
+
     return signOut(auth);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       currentUser?.getIdToken(true).then((tokenId) => {
-        window.localStorage.setItem("token", tokenId);
-      });
+        console.log("tokenId[log]::", tokenId);
 
-      setIsPending(false);
-      setUser(currentUser as TUser);
+        localStore.setData("token", tokenId);
+
+        api.get<{ user: TUser }>("user-details").then((res) => {
+          const { user } = res;
+          localStore.setData("user", user);
+
+          setUser(user);
+          setIsPending(false);
+        });
+      });
     });
     return () => {
       unsubscribe();

@@ -1,5 +1,6 @@
 import remove from "lodash/remove";
 import * as uuid from "uuid";
+import { localStore } from "utils";
 
 type SavedRequest = {
   uri: string;
@@ -8,7 +9,7 @@ type SavedRequest = {
 };
 
 const auth = {
-  token: window.localStorage.getItem("token"),
+  token: localStore.getData("token"),
 };
 
 const getToken = () => {
@@ -16,7 +17,7 @@ const getToken = () => {
     return auth.token;
   }
 
-  auth.token = window.localStorage.getItem("token");
+  auth.token = localStore.getData("token");
 
   return auth.token;
 };
@@ -92,12 +93,12 @@ export class api {
   /*
    * #### CORE FUNCTIONALITY
    */
-  private static fetch(
+  private static fetch<T extends unknown>(
     resourceUri: string,
     method: string,
     optionsOverwrite: RequestInit,
     data?: object
-  ): Promise<Response> {
+  ): Promise<T> {
     if (api.blockAllNewRequests) {
       // eslint-disable-next-line no-alert
       alert(`The client blocked further requests, as too many successive calls triggered our security mechanism.
@@ -137,23 +138,28 @@ export class api {
 
     return new Promise((resolve, reject) => {
       fetch(new Request(uri, options))
-        .then((response) => {
+        .then(async (response) => {
           // Handle simple cases without double confirmation.
           if (!response.ok) {
             reject(api.handleRejection(response));
           } else {
-            resolve(response);
+            try {
+              const responseJson = await response.json();
+              resolve(responseJson);
+            } catch (error) {
+              console.error("API_ERROR[2]: ", error);
+            }
           }
         })
-        .catch((err) => console.error("API_ERROR: ", err));
+        .catch((err) => console.error("API_ERROR[1]: ", err));
     });
   }
 
   /*
    * #### PUBLIC INTERFACE
    */
-  public static get(resourceUri: string, options = {}) {
-    return api.fetch(resourceUri, "GET", options);
+  public static get<T>(resourceUri: string, options = {}) {
+    return api.fetch<T>(resourceUri, "GET", options);
   }
 
   public static post(resourceUri: string, data: any, options = {}) {

@@ -53,16 +53,16 @@ export default function ChatContainer() {
 
   function addToFirrebase(message: string) {
     const newChat = {
-      avatar: user?.photoURL,
+      avatar: user?.picture,
       createdAt: serverTimestamp(),
-      user: user?.displayName,
+      user: user?.first_name,
       message,
     };
 
     const chatRef = doc(chatsRef);
     setDoc(chatRef, newChat)
       .then(() => console.log("Chat added succesfully"))
-      .catch(console.log);
+      .catch(console.error);
   }
 
   function sendChatToSocket(chat: TChatData[]) {
@@ -75,8 +75,8 @@ export default function ChatContainer() {
     if (user) {
       const newChat: TChatData = {
         message,
-        user: user?.displayName as string,
-        avatar: user?.photoURL as string,
+        user: user?.first_name as string,
+        avatar: user?.picture as string,
       };
 
       addToFirrebase(message);
@@ -89,7 +89,7 @@ export default function ChatContainer() {
     return (
       <div style={{ height: "75vh", overflow: "scroll", overflowX: "hidden" }}>
         {chats.map((chat, index) => {
-          if (chat.user === user?.displayName)
+          if (chat.user === user?.first_name)
             return (
               <ChatBoxSender
                 key={index}
@@ -123,7 +123,7 @@ export default function ChatContainer() {
           }}
         >
           <h4>
-            <>Username: {user?.displayName}</>
+            <>Username: {user?.first_name}</>
           </h4>
         </div>
         <ChatsList />

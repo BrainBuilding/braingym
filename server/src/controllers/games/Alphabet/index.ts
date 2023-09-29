@@ -1,15 +1,16 @@
 import { UserInfo } from "firebase-admin/auth";
 import { Request, Response } from "express";
-import { ProfileDB } from "../../../models/Profile";
+import { GameUserLevelDB } from "../../../models/games/GameUserLevel";
 
 class Alphabet {
-  get = async function (
+  getLevel = async function (
     req: Request<{}, any, any, any, Record<string, any>> & { user: UserInfo },
     res: Response<any, Record<string, any>>
   ) {
-    const profile = await ProfileDB.getProfile(req.user.uid);
+    GameUserLevelDB;
+    const level = await GameUserLevelDB.getLevel(req.user.uid, "alphabet");
 
-    res.send(JSON.stringify({ user: profile }));
+    res.send(JSON.stringify({ level: level }));
   };
 }
 

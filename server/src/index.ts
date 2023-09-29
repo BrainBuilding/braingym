@@ -8,6 +8,7 @@ import { authMiddleWare } from "./middlewares/auth";
 import { ProfileDB } from "./models/Profile";
 import { UserInfo } from "firebase-admin/auth";
 import { userDetails } from "./controllers/UserDetails";
+import { alphabet } from "./controllers/games/Alphabet";
 
 const app = express();
 
@@ -34,6 +35,8 @@ const buildPath = path.join(_dirname, "../client/build");
 app.use(express.static(buildPath));
 
 app.get("/api/user-details", userDetails.get);
+
+app.get("/api/games/alphabet/level", alphabet.getLevel);
 
 app.post("/api/profiles", async function (req, res) {
   const data = req.body;

@@ -7,6 +7,7 @@ import cors from "cors";
 import { authMiddleWare } from "./middlewares/auth";
 import { ProfileDB } from "./models/Profile";
 import { UserInfo } from "firebase-admin/auth";
+import { userDetails } from "./controllers/UserDetails";
 
 const app = express();
 
@@ -32,17 +33,7 @@ const buildPath = path.join(_dirname, "../client/build");
 
 app.use(express.static(buildPath));
 
-app.get(
-  "/api/user-details",
-  async function (
-    req: Request<{}, any, any, any, Record<string, any>> & { user: UserInfo },
-    res
-  ) {
-    const dbRes = await ProfileDB.getProfile(req.user.uid);
-
-    res.send(JSON.stringify({ user: dbRes, ts: true }));
-  }
-);
+app.get("/api/user-details", userDetails.get);
 
 app.post("/api/profiles", async function (req, res) {
   const data = req.body;
@@ -53,6 +44,14 @@ app.post("/api/profiles", async function (req, res) {
   );
 
   res.send(JSON.stringify(dbRes));
+});
+
+app.get("/api/*", async function (req, res) {
+  res.status(200).send(
+    JSON.stringify({
+      errorMessage: "The endpoint doesn't exist.",
+    })
+  );
 });
 
 app.get("/*", function (req, res) {

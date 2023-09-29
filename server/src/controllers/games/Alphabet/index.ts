@@ -13,6 +13,6 @@ class Alphabet {
   };
 }
 
-const userDetails = new UserDetails();
+const alphabet = new Alphabet();
 
-export { userDetails };
+export { alphabet };

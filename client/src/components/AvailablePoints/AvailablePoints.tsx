@@ -18,7 +18,10 @@ export const AvailablePoints = () => {
       const pointsData = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
       }));
-      setPoints(pointsData[0]?.points);
+
+      if (pointsData[0]?.points) {
+        setPoints(pointsData[0]?.points);
+      }
     });
   };
 

@@ -66,8 +66,6 @@ export default function ChatContainer() {
   }
 
   function sendChatToSocket(chat: TChatData[]) {
-    console.log("chat[log]::", chat);
-
     socketio.emit("chat", chat);
   }
 

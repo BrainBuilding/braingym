@@ -13,17 +13,17 @@ type TAuthContext = {
   isAuthCheckPending: boolean;
   logOut: () => Promise<void>;
   user: TUser | null;
+  setUser: React.Dispatch<React.SetStateAction<TUser | null>>;
 };
 
-const AuthContext = createContext<TAuthContext>({} as TAuthContext);
+export const AuthContext = createContext<TAuthContext>({} as TAuthContext);
 
 export const AuthContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<TUser | null>(null);
   const [isPending, setIsPending] = useState(true);
 
   const logOut = () => {
-    localStore.deleteData("token");
-    localStore.deleteData("user");
+    setUser(null);
 
     return signOut(auth);
   };
@@ -31,19 +31,14 @@ export const AuthContextProvider = ({ children }: Props) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) {
-        localStore.deleteData("token");
-        localStore.deleteData("user");
         setIsPending(false);
       }
 
       currentUser?.getIdToken(true).then((tokenId) => {
-        console.log("tokenId[log]::", tokenId);
-
         localStore.setData("token", tokenId);
 
         api.get<{ user: TUser }>("user-details").then((res) => {
           const { user } = res;
-          localStore.setData("user", user);
 
           setUser(user);
           setIsPending(false);
@@ -55,9 +50,18 @@ export const AuthContextProvider = ({ children }: Props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!user) {
+      localStore.deleteData("token");
+      localStore.deleteData("user");
+    } else {
+      localStore.setData("user", user);
+    }
+  }, [user]);
+
   return (
     <AuthContext.Provider
-      value={{ logOut, user, isAuthCheckPending: isPending }}
+      value={{ logOut, user, isAuthCheckPending: isPending, setUser }}
     >
       {children}
     </AuthContext.Provider>

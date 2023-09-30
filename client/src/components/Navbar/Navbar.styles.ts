@@ -13,12 +13,12 @@ export const NavbarStyled = styled.div`
     display: flex;
     height: 100%;
 
-
     .log-out-button {
       background: #3da2f3;
       border: none;
       color: ${colors.white};
       font-size: ${fontSizes.lg};
+      cursor: pointer;
 
       &:hover {
         background: ${colors.secondary};

@@ -5,7 +5,7 @@ import { UserAuth } from "context/AuthContext";
 
 export const useGetAlphabetLevel = () => {
   const { user } = UserAuth();
-  const [level, setLevel] = useState<number>(0);
+  const [level, setLevel] = useState<number>(1);
 
   const fetchALevel = async (authUid: string) => {
     const levelSnapshot = await getDoc(

@@ -8,10 +8,14 @@ export const createProfileIfNewUser = (userCredential: UserCredential) => {
     const { isNewUser } = userInfo;
 
     if (isNewUser) {
-      api.post("profiles", {
-        profile: userInfo,
-        uid: userCredential.user.uid,
-      });
+      api
+        .post("profiles", {
+          profile: userInfo,
+          uid: userCredential.user.uid,
+        })
+        .then(() => {
+          window.location.reload();
+        });
     }
   }
 };

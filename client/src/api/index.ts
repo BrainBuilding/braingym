@@ -1,6 +1,7 @@
 import remove from "lodash/remove";
 import * as uuid from "uuid";
 import { localStore } from "utils";
+import { SERVER_PORT } from "constants/index";
 
 type SavedRequest = {
   uri: string;
@@ -8,18 +9,8 @@ type SavedRequest = {
   guid: string;
 };
 
-const auth = {
-  token: localStore.getData("token"),
-};
-
 const getToken = () => {
-  if (auth.token) {
-    return auth.token;
-  }
-
-  auth.token = localStore.getData("token");
-
-  return auth.token;
+  return localStore.getData("token");
 };
 
 export class api {
@@ -176,7 +167,7 @@ export class api {
 
   public static baseURI(): string {
     if (process.env.NODE_ENV === "development") {
-      return "http://localhost:5001/api/";
+      return `http://localhost:${SERVER_PORT}/api/`;
     }
 
     return "api/";

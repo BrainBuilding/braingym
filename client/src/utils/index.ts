@@ -23,4 +23,25 @@ class LocalStorage {
 
 const localStore = new LocalStorage();
 
-export { localStore };
+const repeatWithIntervals = (
+  callback: (nthCb: number) => any,
+  interval: number,
+  repeatTimes: number
+) => {
+  let count = 0;
+
+  function runCallback() {
+    callback(count);
+    count++;
+
+    if (count < repeatTimes) {
+      setTimeout(runCallback, interval * 1000);
+    }
+  }
+
+  if (repeatTimes > 0) {
+    runCallback(); // Call the first callback immediately
+  }
+};
+
+export { localStore, repeatWithIntervals };

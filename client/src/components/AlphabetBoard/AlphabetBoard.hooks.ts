@@ -1,8 +1,9 @@
 import { useWindowDimensions } from "hooks/dom";
 import { useCallback, useMemo } from "react";
 import { TBoardSize } from "./AlphabetBoard";
+import { TLetter } from "types";
 
-export const useCubeSizes = (size: TBoardSize) => {
+export const useCubeSizes = (size: TBoardSize, letters: TLetter[]) => {
   const { height: originalHeight, width: originalWidth } =
     useWindowDimensions();
 
@@ -14,7 +15,7 @@ export const useCubeSizes = (size: TBoardSize) => {
   const sizes = useMemo(() => {
     const ratio = width / height;
 
-    const rowsCount = Math.ceil(Math.sqrt(39 / ratio));
+    const rowsCount = Math.ceil(Math.sqrt(letters.length / ratio));
     const colCount = Math.ceil(rowsCount * ratio);
     const cubeSize = Math.min(
       height / rowsCount - rowsCount * 2.5,
@@ -22,7 +23,7 @@ export const useCubeSizes = (size: TBoardSize) => {
     );
 
     return { rowsCount, colCount, cubeSize };
-  }, [height, width]);
+  }, [height, width, letters.length]);
 
   return sizes;
 };

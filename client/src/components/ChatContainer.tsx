@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
-import socketIOClient from "socket.io-client";
 import {
   doc,
   setDoc,
@@ -10,14 +9,13 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { fireDB } from "configs/firebaseConfig";
+import { socketio } from "configs/socket";
 import { UserAuth } from "context/AuthContext";
 import { TChatData } from "types";
 import { ChatBoxReciever, ChatBoxSender } from "./ChatBox";
 import { InputText } from "./InputText";
 
 export default function ChatContainer() {
-  const PORT = 5001;
-  let socketio = socketIOClient(`http://localhost:${PORT}`);
   const [chats, setChats] = useState<TChatData[]>([]);
   const { user } = UserAuth();
   const chatsRef = useMemo(() => collection(fireDB, "Messages"), []);

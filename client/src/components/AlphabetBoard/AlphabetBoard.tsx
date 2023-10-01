@@ -1,4 +1,5 @@
-import { letters } from "constants/alphabet/armenian";
+import { letters as armenianLetters } from "constants/alphabet/armenian";
+import { TLetter } from "types";
 import { useCubeSizes } from "./AlphabetBoard.hooks";
 import { AlphabetBoardStyled } from "./AlphabetBoard.styles";
 
@@ -8,11 +9,17 @@ type TProps = {
   onClick: (letterKey: string) => any;
   selectedLetters?: string[];
   size?: TBoardSize;
+  letters?: TLetter[];
 };
 
 export const AlphabetBoard: React.FC<TProps> = (props) => {
-  const { onClick, selectedLetters = [], size = "large" } = props;
-  const sizes = useCubeSizes(size);
+  const {
+    onClick,
+    selectedLetters = [],
+    size = "large",
+    letters = armenianLetters,
+  } = props;
+  const sizes = useCubeSizes(size, letters);
 
   return (
     <AlphabetBoardStyled

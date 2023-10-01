@@ -1,4 +1,5 @@
-import express, { Request } from "express";
+import express from "express";
+import { v4 as uuidv4 } from "uuid";
 import http from "http";
 
 import { Server } from "socket.io";
@@ -9,6 +10,8 @@ import { ProfileDB } from "./models/Profile";
 import { UserInfo } from "firebase-admin/auth";
 import { userDetails } from "./controllers/UserDetails";
 import { alphabet } from "./controllers/games/Alphabet";
+import { getRandomItem, shuffle } from "./utils/array";
+import { TGameAlphabetChallenge, TSocketRes } from "./types/shared";
 
 const app = express();
 
@@ -74,6 +77,9 @@ io.on("connection", (socket) => {
   socket.on("chat", (chat) => {
     io.emit("chat", chat);
   });
+
+  alphabet.setSocket(socket);
+  socket.on("play/alphabet", alphabet.startTheGame);
 
   socket.on("disconnect", () => {
     console.log("disconnected");

@@ -9,11 +9,6 @@ class GameUserLevel {
 
   async getLevel(uid: string, gameName: string) {
     const snapshot = await this.db.doc(this.getId({ uid, gameName })).get();
-    // .where("authUid", "==", uid)
-    // .where("gameName", "==", gameName)
-    // .get();
-
-    console.log("snapshot[log]::", snapshot);
 
     if (!snapshot) {
       return 1;
@@ -27,8 +22,8 @@ class GameUserLevel {
 
     return await this.db.doc(this.getId({ uid, gameName })).set(
       {
-        level: currentLevelInfo.level + 1,
         ...currentLevelInfo,
+        level: currentLevelInfo.level + 1,
       },
       { merge: true }
     );

@@ -1,5 +1,4 @@
 import express from "express";
-import { v4 as uuidv4 } from "uuid";
 import http from "http";
 
 import { Server } from "socket.io";
@@ -7,11 +6,8 @@ import path from "path";
 import cors from "cors";
 import { authMiddleWare } from "./middlewares/auth";
 import { ProfileDB } from "./models/Profile";
-import { UserInfo } from "firebase-admin/auth";
 import { userDetails } from "./controllers/UserDetails";
 import { alphabet } from "./controllers/games/Alphabet";
-import { getRandomItem, shuffle } from "./utils/array";
-import { TGameAlphabetChallenge, TSocketRes } from "./types/shared";
 
 const app = express();
 
@@ -86,6 +82,6 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.CUSTOM_PORT || 5001;
 
 server.listen(PORT, () => console.log(`Listening to port ${PORT}`));

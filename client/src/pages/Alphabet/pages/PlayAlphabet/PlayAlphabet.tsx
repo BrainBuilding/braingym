@@ -5,6 +5,7 @@ import { AvailablePoints } from "components/AvailablePoints";
 import { AlphabetBoard } from "components/AlphabetBoard";
 import { usePlaySound } from "components/AlphabetBoard/AlphabetBoard.hooks";
 import { letters } from "constants/alphabet/armenian";
+import { SERVER_PORT } from "constants/index";
 import { SocketApi } from "socket";
 
 import {
@@ -63,6 +64,8 @@ export const PlayAlphabet = () => {
     playGameSocketRes?.game?.data.challenge?.letters.map((letterKey) => {
       return letters.find((letter) => letter.key === letterKey) as TLetter;
     }) || [];
+
+  console.log("SERVER_PORT[log]::", SERVER_PORT);
 
   return (
     <div>

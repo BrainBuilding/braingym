@@ -7,8 +7,6 @@ class UserDetails {
     req: Request<{}, any, any, any, Record<string, any>> & { user: UserInfo },
     res: Response<any, Record<string, any>>
   ) {
-    console.log("req.user.uid[log]::", req.user.uid);
-
     const profile = await ProfileDB.getProfile(req.user.uid);
 
     res.send(JSON.stringify({ user: profile }));

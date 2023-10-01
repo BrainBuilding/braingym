@@ -1,34 +1,19 @@
 import { AvailablePoints } from "components/AvailablePoints";
 import { AlphabetBoard } from "components/AlphabetBoard";
 import { useState } from "react";
-import { Dictionary } from "lodash";
-import { useGetAlphabetLevel } from "./PlayAlphabet.hooks";
+import { useSelectLetters } from "./PlayAlphabet.hooks";
 import { Button } from "components/Button";
 
 export const PlayAlphabet = () => {
-  const [selectedLetters, setSelectedLetters] = useState<Dictionary<boolean>>(
-    {}
+  const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
+
+  const { level, onChooseLetter, leftToSelectCount } = useSelectLetters(
+    selectedLetters,
+    setSelectedLetters
   );
 
-  const level = useGetAlphabetLevel();
-
-  const selectedLettersCount =
-    Object.values(selectedLetters).filter(Boolean).length;
-  const allowedLettersCount = level * 3;
-
-  const leftToSelectCount = allowedLettersCount - selectedLettersCount;
-
-  const onChooseLetter = (letter: string) => {
-    return () =>
-      setSelectedLetters((currentSelectedLetters) => {
-        const newValue = !currentSelectedLetters[letter];
-
-        if (!leftToSelectCount && newValue) {
-          return currentSelectedLetters;
-        }
-
-        return { ...currentSelectedLetters, [letter]: newValue };
-      });
+  const onPlay = () => {
+    console.log("selectedLetters[log]::", selectedLetters);
   };
 
   return (
@@ -45,7 +30,9 @@ export const PlayAlphabet = () => {
         />
         <div>Left to select {leftToSelectCount} letters.</div>
 
-        <Button disabled={!!leftToSelectCount}>Play</Button>
+        <Button onClick={onPlay} disabled={!!leftToSelectCount}>
+          Play
+        </Button>
       </div>
     </div>
   );

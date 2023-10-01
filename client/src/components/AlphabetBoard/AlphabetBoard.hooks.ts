@@ -1,5 +1,5 @@
 import { useWindowDimensions } from "hooks/dom";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { TBoardSize } from "./AlphabetBoard";
 
 export const useCubeSizes = (size: TBoardSize) => {
@@ -25,4 +25,12 @@ export const useCubeSizes = (size: TBoardSize) => {
   }, [height, width]);
 
   return sizes;
+};
+
+export const usePlaySound = () => {
+  return useCallback((letterKey: string) => {
+    const audio = new Audio(`/sounds/alphabets/armenian/${letterKey}.mp3`);
+
+    return () => audio.play();
+  }, []);
 };

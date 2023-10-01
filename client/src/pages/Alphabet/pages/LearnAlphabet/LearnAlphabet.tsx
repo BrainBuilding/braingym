@@ -1,11 +1,9 @@
 import { AlphabetBoard } from "components/AlphabetBoard";
+import { usePlaySound } from "components/AlphabetBoard/AlphabetBoard.hooks";
 import { LearnAlphabetStyled } from "./LearnAlphabet.styles";
 
 export const LearnAlphabet = () => {
-  const playSound = (letterKey: string) => {
-    const audio = new Audio(`/sounds/alphabets/armenian/${letterKey}.mp3`);
-    return () => audio.play();
-  };
+  const playSound = usePlaySound();
 
   return (
     <LearnAlphabetStyled className="alphabet">

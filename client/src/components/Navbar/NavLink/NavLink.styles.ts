@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors, fontSizes, spaces } from "styles";
 
 export const NavLinkStyled = styled.div`
-  width: 100px;
+  width: 60px;
   height: 100%;
   background: ${colors.main};
 
@@ -19,7 +19,7 @@ export const NavLinkStyled = styled.div`
     text-decoration: none;
     cursor: pointer;
     font-family: sans-serif;
-    font-size: ${fontSizes.lg};
+    font-size: ${fontSizes.md};
     color: ${colors.white};
     position: relative;
     justify-content: center;

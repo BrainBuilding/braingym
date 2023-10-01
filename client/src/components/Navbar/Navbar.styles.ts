@@ -17,7 +17,7 @@ export const NavbarStyled = styled.div`
       background: #3da2f3;
       border: none;
       color: ${colors.white};
-      font-size: ${fontSizes.lg};
+      font-size: ${fontSizes.md};
       cursor: pointer;
 
       &:hover {

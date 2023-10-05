@@ -1,3 +1,4 @@
+import Logout from "@mui/icons-material/Logout";
 import { Logo } from "components/Logo";
 import { NavLink } from "components/Navbar/NavLink";
 import { UserAuth } from "context/AuthContext";
@@ -19,13 +20,27 @@ export const Navbar = () => {
     <NavbarStyled className="nav-bar">
       <Logo />
 
-      <div className="nav-bar-buttons">
-        <NavLink to="/">Chat</NavLink>
-        <NavLink to="/account">Account</NavLink>
-        <NavLink to="/alphabet">Alphabet</NavLink>
-        {user && <button className="log-out-button" onClick={handleSignOut}>Logout</button>}
-        {user && <Avatar user={user} />}
-      </div>
+      {user && (
+        <div className="nav-bar-buttons">
+          <div className="buttons-wrapper">
+            <NavLink to="/">Chat</NavLink>
+            <NavLink to="/account">Account</NavLink>
+            <NavLink to="/alphabet">Alphabet</NavLink>
+          </div>
+
+          <div className="buttons-wrapper user-buttons-wrapper">
+            <Avatar user={user} />
+
+            <button
+              title="Logout"
+              className="log-out-button"
+              onClick={handleSignOut}
+            >
+              <Logout />
+            </button>
+          </div>
+        </div>
+      )}
     </NavbarStyled>
   );
 };

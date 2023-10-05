@@ -39,6 +39,7 @@ export const AvailablePoints: React.FC<TProps> = (props) => {
         });
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.authUid]);
 
   return (

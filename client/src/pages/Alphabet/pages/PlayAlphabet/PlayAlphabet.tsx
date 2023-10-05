@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "components/Button";
 import { showEmoji } from "components/Emoji/Emoji";
-import { AvailablePoints } from "components/AvailablePoints";
+import { LevelAndPoints } from "components/LevelAndPoints";
 import { AlphabetBoard } from "components/AlphabetBoard";
 import { usePlaySound } from "components/AlphabetBoard/AlphabetBoard.hooks";
 import { letters } from "constants/alphabet/armenian";
@@ -15,6 +15,7 @@ import {
 import { UserAuth } from "context/AuthContext";
 import { TLetter } from "types";
 import { useSelectLetters } from "./PlayAlphabet.hooks";
+import { PlayAlphabetStyled } from "./PlayAlphabet.styles";
 
 export const PlayAlphabet = () => {
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
@@ -24,7 +25,7 @@ export const PlayAlphabet = () => {
 
   const { user } = UserAuth();
 
-  const { level, onChooseLetter, leftToSelectCount } = useSelectLetters(
+  const { onChooseLetter, leftToSelectCount } = useSelectLetters(
     selectedLetters,
     setSelectedLetters
   );
@@ -65,10 +66,9 @@ export const PlayAlphabet = () => {
     }) || [];
 
   return (
-    <div>
+    <PlayAlphabetStyled>
       <h1>PlayAlphabet</h1>
-      <AvailablePoints collectionName="PointsAlphabet" />
-      <div>Level: {level}</div>
+      <LevelAndPoints levelPoints={100} collectionName="PointsAlphabet" />
 
       <div>
         <AlphabetBoard
@@ -111,6 +111,6 @@ export const PlayAlphabet = () => {
           </div>
         </div>
       </div>
-    </div>
+    </PlayAlphabetStyled>
   );
 };

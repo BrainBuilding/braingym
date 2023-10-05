@@ -7,6 +7,8 @@ export const colors = {
   red: "#eb4612",
   yellow: "#f8ca02",
   green: "#539b40",
+  gray: "#555555",
+  text: "#3a3a3a",
 };
 
 export const spaces = {

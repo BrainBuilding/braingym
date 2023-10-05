@@ -1,1 +1,0 @@
-export { AvailablePoints } from "./AvailablePoints";

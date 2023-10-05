@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
+import Star from "@mui/icons-material/Star";
 import { onSnapshot, doc, Unsubscribe } from "firebase/firestore";
 import { fireDB } from "configs/firebaseConfig";
 import { UserAuth } from "context/AuthContext";
+import { LevelAndPointsStyled } from "./LevelAndPoints.styles";
+import { ProgressBar } from "../ProgressBar";
+import { colors } from "../../styles";
 
 type TProps = {
   collectionName: string;
+  levelPoints: number;
 };
 
-export const AvailablePoints: React.FC<TProps> = (props) => {
-  const { collectionName } = props;
+export const LevelAndPoints: React.FC<TProps> = (props) => {
+  const { collectionName, levelPoints } = props;
   const { user } = UserAuth();
   const [points, setPoints] = useState<number>(0);
 
@@ -42,9 +47,15 @@ export const AvailablePoints: React.FC<TProps> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.authUid]);
 
+  const level = Math.floor(points / levelPoints);
+  const currentPoints = points - level * levelPoints;
+
   return (
-    <div>
-      <div>Points: {points}</div>
-    </div>
+    <LevelAndPointsStyled className="level-and-points">
+      <div className="label">Level</div>
+      <div className="current-level">{level}</div>
+      <ProgressBar value={currentPoints} ofValue={levelPoints} />
+      <Star htmlColor={colors.yellow} />
+    </LevelAndPointsStyled>
   );
 };

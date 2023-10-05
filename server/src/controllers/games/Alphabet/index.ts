@@ -11,7 +11,7 @@ import {
   TSocketReq,
   TSocketAnswer,
 } from "../../../types/shared";
-import { AvailablePointsDB } from "../../../models/games/AvailablePoints";
+import { PointsAlphabetDB } from "../../../models/games/PointsAlphabet";
 import { EarnedPointsDB } from "../../../models/games/EarnedPoints";
 
 class Alphabet {
@@ -79,9 +79,9 @@ class Alphabet {
     const isAnswerCorrect = answerReq.answer === correctAnswer;
 
     if (isAnswerCorrect) {
-      AvailablePointsDB.increase(answerReq.authUid, 1);
+      PointsAlphabetDB.increase(answerReq.authUid, 1);
     } else {
-      AvailablePointsDB.decrease(answerReq.authUid, 1);
+      PointsAlphabetDB.decrease(answerReq.authUid, 1);
     }
 
     EarnedPointsDB.addPoint(answerReq.authUid, {

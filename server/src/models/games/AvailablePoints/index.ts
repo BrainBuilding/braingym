@@ -1,7 +1,11 @@
 import { admin } from "../../../config/firebase.config";
 
 class AvailablePoints {
-  db = admin.firestore().collection("AvailablePoints");
+  db: admin.firestore.CollectionReference<admin.firestore.DocumentData>;
+
+  constructor(collectionName: string) {
+    this.db = admin.firestore().collection(collectionName);
+  }
 
   getId = ({ uid }: { uid: string }) => {
     return uid;
@@ -45,6 +49,4 @@ class AvailablePoints {
   }
 }
 
-const AvailablePointsDB = new AvailablePoints();
-
-export { AvailablePointsDB };
+export { AvailablePoints };

@@ -3,12 +3,17 @@ import { onSnapshot, doc, Unsubscribe } from "firebase/firestore";
 import { fireDB } from "configs/firebaseConfig";
 import { UserAuth } from "context/AuthContext";
 
-export const AvailablePoints = () => {
+type TProps = {
+  collectionName: string;
+};
+
+export const AvailablePoints: React.FC<TProps> = (props) => {
+  const { collectionName } = props;
   const { user } = UserAuth();
   const [points, setPoints] = useState<number>(0);
 
   const fetchAvailablePoints = async (authUid: string) => {
-    const docRef = doc(fireDB, "AvailablePoints", authUid);
+    const docRef = doc(fireDB, collectionName, authUid);
 
     const unsubscribe = onSnapshot(docRef, (docSnap) => {
       if (docSnap.exists()) {
@@ -38,7 +43,7 @@ export const AvailablePoints = () => {
 
   return (
     <div>
-      <div>Available Points: {points}</div>
+      <div>Points: {points}</div>
     </div>
   );
 };

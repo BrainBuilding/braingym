@@ -9,5 +9,5 @@ export const useActiveLetters = (): string[] => {
 
   const activeLettersCount = 3 + level;
 
-  return letters.slice(0, activeLettersCount).map((letter) => letter.key);
+  return letters.slice(level, activeLettersCount).map((letter) => letter.key);
 };

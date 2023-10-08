@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import { Socket } from "socket.io";
+import shuffle from 'lodash/shuffle';
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import {
   getRandomElementsFromArray,
   getRandomItem,
-  shuffle,
 } from "../../../utils/array";
 import {
   TSocketRes,

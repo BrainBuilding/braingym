@@ -1,36 +1,38 @@
 import { styled } from "styled-components";
-import { spaces, colors } from "styles";
-import { TBoardSize } from "./AlphabetBoard";
+import { colors, fontSizes } from "styles";
 
-type Props = {
-  sizes: {
-    rowsCount: number;
-    colCount: number;
-    cubeSize: number;
-  };
-  size: TBoardSize;
+const ratio = {
+  small: 0.7,
+  large: 1,
 };
 
-export const AlphabetBoardStyled = styled.div<Props>`
-  width: ${({ size }) => (size === "small" ? "50%" : "100%")};
+export const AlphabetBoardStyled = styled.div`
   display: grid;
-  grid-template-columns: ${({ sizes }) => `repeat(${sizes.colCount}, 1fr)`};
-  grid-template-rows: ${({ sizes }) => `repeat(${sizes.rowsCount}, 1fr)`};
-  gap: ${spaces.sm};
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  max-width: 100%;
 
-  .grid-item {
-    background-color: ${colors.rose};
-    aspect-ratio: 1;
-    text-align: center;
+  &.small {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(${100 * ratio.small}px, 1fr)
+    );
+
+    .square {
+      font-size: ${fontSizes.sm};
+    }
+  }
+
+  .square {
+    align-items: center;
     justify-content: center;
     display: flex;
-    flex-direction: column;
-    letter-spacing: ${spaces.xs};
-    font-size: ${({ sizes }) => `${sizes.cubeSize / 4}px`};
+    background-color: ${colors.rose};
+    aspect-ratio: 1;
+    user-select: none;
     cursor: pointer;
     color: ${colors.white};
-    user-select: none;
-    width: ${({ sizes }) => `${sizes.cubeSize}px`};
+    text-align: center;
 
     &:hover {
       background-color: ${colors.roseDark};
@@ -38,6 +40,34 @@ export const AlphabetBoardStyled = styled.div<Props>`
 
     &.selected {
       background-color: ${colors.secondary};
+    }
+  }
+
+  @media (max-width: 1080px) {
+    & {
+      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      gap: 5px;
+
+      &.small {
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(${70 * ratio.small}px, 1fr)
+        );
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    & {
+      grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+      gap: 5px;
+
+      &.small {
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(${50 * ratio.small}px, 1fr)
+        );
+      }
     }
   }
 `;

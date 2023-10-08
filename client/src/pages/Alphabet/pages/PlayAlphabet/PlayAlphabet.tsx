@@ -71,7 +71,7 @@ export const PlayAlphabet = () => {
         <AlphabetBoard size="small" selectedLetters={selectedLetters} />
 
         <div>
-          <div>
+          <div className="button-wrapper">
             <Button onClick={onPlay}>Play</Button>
           </div>
 

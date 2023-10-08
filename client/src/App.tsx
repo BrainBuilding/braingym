@@ -65,6 +65,8 @@ function App() {
           </Routes>
         </>
       </AuthContextProvider>
+
+      <div className="developed-by">Developed by Narek & Hayk & Maya</div>
     </>
   );
 }

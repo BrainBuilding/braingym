@@ -126,8 +126,6 @@ export default function ChatContainer() {
 
         <InputText addMessage={addMessage} />
       </div>
-
-      <div className="developed-by">Developed by Narek & Hayk</div>
     </div>
   );
 }

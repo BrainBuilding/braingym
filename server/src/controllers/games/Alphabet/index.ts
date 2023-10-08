@@ -1,31 +1,31 @@
-import { UserInfo } from "firebase-admin/auth";
-import { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
-import { GameUserLevelDB } from "../../../models/games/GameUserLevel";
 import { Socket } from "socket.io";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
-import { getRandomItem, shuffle } from "../../../utils/array";
+import {
+  getRandomElementsFromArray,
+  getRandomItem,
+  shuffle,
+} from "../../../utils/array";
 import {
   TSocketRes,
   TGameAlphabetChallenge,
   TSocketReq,
   TSocketAnswer,
-} from "../../../types/shared";
+} from "../../../shared/types";
 import { PointsAlphabetDB } from "../../../models/games/PointsAlphabet";
 import { EarnedPointsDB } from "../../../models/games/EarnedPoints";
+import { letters } from "../../../shared/constants/alphabet/armenian";
 
 class Alphabet {
   socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>;
   gamesMap = new Map();
 
-  getLevel = async function (
-    req: Request<{}, any, any, any, Record<string, any>> & { user: UserInfo },
-    res: Response<any, Record<string, any>>
-  ) {
-    GameUserLevelDB;
-    const level = await GameUserLevelDB.getLevel(req.user.uid, "alphabet");
+  getLevel = async function (uid: string) {
+    const pointsData = await PointsAlphabetDB.getAvailablePoints(uid);
 
-    res.send(JSON.stringify({ level: level }));
+    return Math.floor(
+      pointsData.points / PointsAlphabetDB.POINTS_REQUIRED_TO_LEVEL_UP
+    );
   };
 
   setSocket = (
@@ -34,8 +34,11 @@ class Alphabet {
     this.socket = socket;
   };
 
-  getAlphabetRes = (req: TSocketReq<string[]>) => {
-    const selectedLetters = req.data;
+  getAlphabetRes = async (req: TSocketReq<string[]>) => {
+    const level = await this.getLevel(req.user.authUid);
+    const randomLetters = getRandomElementsFromArray(letters, 3 + level, 3);
+
+    const selectedLetters = randomLetters.map((letter) => letter.key);
     const shuffledLetters = shuffle(selectedLetters);
     const randomLetter = getRandomItem(selectedLetters);
 
@@ -96,8 +99,8 @@ class Alphabet {
     this.startTheGame(req);
   };
 
-  startTheGame = (req: TSocketReq<string[]>) => {
-    const { gameData, answer } = this.getAlphabetRes(req);
+  startTheGame = async (req: TSocketReq<string[]>) => {
+    const { gameData, answer } = await this.getAlphabetRes(req);
 
     this.socket.emit("play/alphabet", gameData);
 

@@ -1,4 +1,4 @@
-import { TUser } from "types";
+import { TUser } from "shared/types";
 
 type Props = { user: TUser };
 

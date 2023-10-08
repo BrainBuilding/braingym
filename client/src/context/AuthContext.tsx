@@ -1,7 +1,7 @@
 import { useContext, createContext, useEffect, useState } from "react";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "configs/firebaseConfig";
-import { TUser } from "types";
+import { TUser } from "shared/types";
 import { api } from "api";
 import { localStore } from "utils";
 

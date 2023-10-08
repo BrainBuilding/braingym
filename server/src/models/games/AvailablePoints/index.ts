@@ -2,6 +2,7 @@ import { admin } from "../../../config/firebase.config";
 
 class AvailablePoints {
   db: admin.firestore.CollectionReference<admin.firestore.DocumentData>;
+  POINTS_REQUIRED_TO_LEVEL_UP = 200;
 
   constructor(collectionName: string) {
     this.db = admin.firestore().collection(collectionName);

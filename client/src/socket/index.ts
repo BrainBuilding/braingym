@@ -5,6 +5,10 @@ const getToken = () => {
   return localStore.getData("token");
 };
 
+const getUser = () => {
+  return localStore.getData("user");
+};
+
 export class SocketApi {
   static on = (event: string, listener: (data: any) => any) =>
     socketio.on(event, listener);
@@ -12,9 +16,10 @@ export class SocketApi {
   static off = (event: string, listener: (data: any) => any) =>
     socketio.off(event, listener);
 
-  static emit = (event: string, data: any) => {
+  static emit = (event: string, data?: any) => {
     return socketio.emit(event, {
       token: getToken(),
+      user: getUser(),
       data,
     });
   };

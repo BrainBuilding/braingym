@@ -1,34 +1,28 @@
 import { useEffect, useState } from "react";
+import { SocketApi } from "socket";
+import { letters } from "shared/constants/alphabet/armenian";
 import { Button } from "components/Button";
 import { showEmoji } from "components/Emoji/Emoji";
 import { LevelAndPoints } from "components/LevelAndPoints";
 import { AlphabetBoard } from "components/AlphabetBoard";
 import { usePlaySound } from "components/AlphabetBoard/AlphabetBoard.hooks";
-import { letters } from "constants/alphabet/armenian";
-import { SocketApi } from "socket";
 
 import {
   TGameAlphabetChallenge,
   TSocketAnswer,
   TSocketRes,
-} from "types/shared";
+} from "shared/types";
 import { UserAuth } from "context/AuthContext";
-import { TLetter } from "types";
-import { useSelectLetters } from "./PlayAlphabet.hooks";
+import { TLetter } from "shared/types";
+import { useActiveLetters } from "./PlayAlphabet.hooks";
 import { PlayAlphabetStyled } from "./PlayAlphabet.styles";
 
 export const PlayAlphabet = () => {
-  const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
   const [playGameSocketRes, setPlayGameSocketRes] = useState<
     TSocketRes<TGameAlphabetChallenge> | undefined
   >();
 
   const { user } = UserAuth();
-
-  const { onChooseLetter, leftToSelectCount } = useSelectLetters(
-    selectedLetters,
-    setSelectedLetters
-  );
 
   useEffect(() => {
     const playAlphabetListener = (
@@ -57,7 +51,7 @@ export const PlayAlphabet = () => {
   }, [playGameSocketRes?.game?.data.challenge, playSound]);
 
   const onPlay = () => {
-    SocketApi.emit("play/alphabet", selectedLetters);
+    SocketApi.emit("play/alphabet");
   };
 
   const challengeLetters =
@@ -65,29 +59,23 @@ export const PlayAlphabet = () => {
       return letters.find((letter) => letter.key === letterKey) as TLetter;
     }) || [];
 
+  const selectedLetters = useActiveLetters();
+
   return (
     <PlayAlphabetStyled>
       <h1>PlayAlphabet</h1>
       <LevelAndPoints levelPoints={100} collectionName="PointsAlphabet" />
 
       <div>
-        <AlphabetBoard
-          size="small"
-          onClick={onChooseLetter}
-          selectedLetters={selectedLetters}
-        />
+        <AlphabetBoard size="small" selectedLetters={selectedLetters} />
 
         <div>
           <div>
-            <div>Left to select {leftToSelectCount} letters.</div>
-
-            <Button onClick={onPlay} disabled={!!leftToSelectCount}>
-              Play
-            </Button>
+            <Button onClick={onPlay}>Play</Button>
           </div>
 
           <div>
-            {challengeLetters.length && (
+            {challengeLetters.length ? (
               <AlphabetBoard
                 size="small"
                 onClick={(letterKey) => () => {
@@ -107,7 +95,7 @@ export const PlayAlphabet = () => {
                 }}
                 letters={challengeLetters}
               />
-            )}
+            ) : null}
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { useWindowDimensions } from "hooks/dom";
 import { useCallback, useMemo } from "react";
 import { TBoardSize } from "./AlphabetBoard";
-import { TLetter } from "types";
+import { TLetter } from "shared/types";
 
 export const useCubeSizes = (size: TBoardSize, letters: TLetter[]) => {
   const { height: originalHeight, width: originalWidth } =

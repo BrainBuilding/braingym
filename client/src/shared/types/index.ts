@@ -1,5 +1,19 @@
+export type TUser = {
+  authUid: string;
+  city: string;
+  country: string;
+  email: string;
+  first_name: string;
+  id: string;
+  last_name: string;
+  locale: string;
+  picture: string;
+  school: string;
+};
+
 export type TSocketReq<T extends unknown> = {
   token: string;
+  user: TUser;
   data: T;
 };
 
@@ -22,4 +36,12 @@ export type TSocketRes<T extends any> = {
 export type TGameAlphabetChallenge = {
   letters: string[];
   letter: string;
+};
+
+export type TLetter = {
+  key: string;
+  value: {
+    uppercase: string;
+    lowercase: string;
+  };
 };

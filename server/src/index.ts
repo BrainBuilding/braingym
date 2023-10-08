@@ -35,8 +35,6 @@ app.use(express.static(buildPath));
 
 app.get("/api/user-details", userDetails.get);
 
-app.get("/api/games/alphabet/level", alphabet.getLevel);
-
 app.post("/api/profiles", async function (req, res) {
   const data = req.body;
 

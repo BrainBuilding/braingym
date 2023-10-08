@@ -16,6 +16,7 @@ import { UserAuth } from "context/AuthContext";
 import { TLetter } from "shared/types";
 import { useActiveLetters } from "./PlayAlphabet.hooks";
 import { PlayAlphabetStyled } from "./PlayAlphabet.styles";
+import { Timer } from "../../../../components/Timer/Timer";
 
 export const PlayAlphabet = () => {
   const [playGameSocketRes, setPlayGameSocketRes] = useState<
@@ -75,26 +76,33 @@ export const PlayAlphabet = () => {
           </div>
 
           <div>
-            {challengeLetters.length ? (
-              <AlphabetBoard
-                size="small"
-                onClick={(letterKey) => () => {
-                  if (playGameSocketRes?.game?.gameId) {
-                    SocketApi.emit(playGameSocketRes?.game?.gameId, {
-                      authUid: user?.authUid,
-                      answer: letterKey,
-                    } as TSocketAnswer<string>);
+            {playGameSocketRes?.game?.gameId ? (
+              <>
+                <Timer
+                  key={playGameSocketRes?.game?.gameId}
+                  time={playGameSocketRes?.game?.time as number}
+                  onTimeOff={setPlayGameSocketRes}
+                />
+                <AlphabetBoard
+                  size="small"
+                  onClick={(letterKey) => () => {
+                    if (playGameSocketRes?.game?.gameId) {
+                      SocketApi.emit(playGameSocketRes?.game?.gameId, {
+                        authUid: user?.authUid,
+                        answer: letterKey,
+                      } as TSocketAnswer<string>);
 
-                    SocketApi.on(
-                      playGameSocketRes?.game?.gameId,
-                      (isCorrect: boolean) => {
-                        showEmoji(isCorrect ? "😍" : "😔");
-                      }
-                    );
-                  }
-                }}
-                letters={challengeLetters}
-              />
+                      SocketApi.on(
+                        playGameSocketRes?.game?.gameId,
+                        (isCorrect: boolean) => {
+                          showEmoji(isCorrect ? "😍" : "😔");
+                        }
+                      );
+                    }
+                  }}
+                  letters={challengeLetters}
+                />
+              </>
             ) : null}
           </div>
         </div>

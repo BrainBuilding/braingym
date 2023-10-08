@@ -7,7 +7,6 @@ export const Letters = () => {
     <LettersStyled className="letters">
       <SubNavbar
         items={[
-          { to: "learn", children: "Learn" },
           { to: "alphabet", children: "Alphabet" },
           { to: "vowels", children: "Vowels" },
         ]}

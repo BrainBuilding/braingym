@@ -8,7 +8,6 @@ import { Protected } from "components/Protected";
 import { Account } from "pages/Account";
 import { LogIn } from "pages/LogIn";
 import { Letters } from "pages/Letters";
-import { LearnAlphabet } from "pages/Letters/pages/LearnAlphabet";
 import { PlayAlphabet } from "pages/Letters/pages/PlayAlphabet";
 import { Vowels } from "pages/Letters/pages/Vowels";
 
@@ -45,16 +44,12 @@ function App() {
                 </Protected>
               }
             >
-              <Route index element={<Navigate to="learn" replace={true} />} />
               <Route
-                path="learn"
-                element={
-                  <Protected>
-                    <LearnAlphabet />
-                  </Protected>
-                }
+                index
+                element={<Navigate to="alphabet" replace={true} />}
               />
               <Route
+                index
                 path="alphabet"
                 element={
                   <Protected>

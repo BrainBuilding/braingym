@@ -1,1 +1,0 @@
-export { LearnAlphabet } from "./LearnAlphabet";

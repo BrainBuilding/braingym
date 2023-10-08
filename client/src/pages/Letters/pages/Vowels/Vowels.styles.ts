@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { colors, spaces } from "styles";
 
 export const VowelsStyled = styled.div`
+  padding: ${spaces.lg};
+
   .alphabet-board {
     .has-multiple-sound {
       background-color: ${colors.grayXLight};

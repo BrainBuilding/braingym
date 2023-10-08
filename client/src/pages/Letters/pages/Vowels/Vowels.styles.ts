@@ -5,6 +5,8 @@ export const VowelsStyled = styled.div`
   padding: ${spaces.lg};
 
   .alphabet-board {
+    margin-top: ${spaces.md};
+
     .has-multiple-sound {
       background-color: ${colors.grayXLight};
       pointer-events: none;

@@ -5,6 +5,7 @@ import { colors } from "../../styles";
 type TProps = {
   disabled?: boolean;
   color?: TColors;
+  hoverColor?: TColors;
 };
 
 export const ButtonStyled = styled.div<TProps>`
@@ -20,6 +21,7 @@ export const ButtonStyled = styled.div<TProps>`
   cursor: pointer;
 
   &:hover {
-    background: ${colors.secondary};
+    background: ${({ hoverColor }) =>
+      colors[hoverColor as TColors] || colors.secondary};
   }
 `;

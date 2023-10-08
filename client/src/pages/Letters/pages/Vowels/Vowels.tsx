@@ -22,7 +22,9 @@ export const Vowels = () => {
 
         <div className="buttons-wrapper">
           <Button color="secondary">Ձայնավոր</Button>
-          <Button color="rose">Բաղաձայն</Button>
+          <Button color="rose" hoverColor="roseDark">
+            Բաղաձայն
+          </Button>
         </div>
       </div>
     </VowelsStyled>

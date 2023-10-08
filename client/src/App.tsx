@@ -7,9 +7,9 @@ import { Emoji } from "components/Emoji";
 import { Protected } from "components/Protected";
 import { Account } from "pages/Account";
 import { LogIn } from "pages/LogIn";
-import { Alphabet } from "pages/Alphabet";
-import { LearnAlphabet } from "pages/Alphabet/pages/LearnAlphabet";
-import { PlayAlphabet } from "pages/Alphabet/pages/PlayAlphabet";
+import { Letters } from "pages/Letters";
+import { LearnAlphabet } from "pages/Letters/pages/LearnAlphabet";
+import { PlayAlphabet } from "pages/Letters/pages/PlayAlphabet";
 
 function App() {
   return (
@@ -37,10 +37,10 @@ function App() {
               }
             />
             <Route
-              path="/alphabet"
+              path="/letters"
               element={
                 <Protected>
-                  <Alphabet />
+                  <Letters />
                 </Protected>
               }
             >
@@ -54,7 +54,7 @@ function App() {
                 }
               />
               <Route
-                path="play"
+                path="alphabet"
                 element={
                   <Protected>
                     <PlayAlphabet />

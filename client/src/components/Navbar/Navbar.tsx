@@ -25,7 +25,7 @@ export const Navbar = () => {
           <div className="buttons-wrapper">
             <NavLink to="/">Chat</NavLink>
             <NavLink to="/account">Account</NavLink>
-            <NavLink to="/alphabet">Alphabet</NavLink>
+            <NavLink to="/letters">Letters</NavLink>
           </div>
 
           <div className="buttons-wrapper user-buttons-wrapper">

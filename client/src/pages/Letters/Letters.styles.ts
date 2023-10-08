@@ -1,3 +1,3 @@
 import { styled } from "styled-components";
 
-export const AlphabetStyled = styled.div``;
+export const LettersStyled = styled.div``;

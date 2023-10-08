@@ -24,6 +24,7 @@ export const PlayAlphabet = () => {
   >();
 
   const { user } = UserAuth();
+  const playSound = usePlaySound();
 
   useEffect(() => {
     const playAlphabetListener = (
@@ -42,8 +43,6 @@ export const PlayAlphabet = () => {
       playAlphabetRef.off();
     };
   }, []);
-
-  const playSound = usePlaySound();
 
   useEffect(() => {
     if (playGameSocketRes?.game?.data.challenge) {
@@ -68,7 +67,11 @@ export const PlayAlphabet = () => {
       <LevelAndPoints levelPoints={100} collectionName="PointsAlphabet" />
 
       <div>
-        <AlphabetBoard size="small" selectedLetters={selectedLetters} />
+        <AlphabetBoard
+          onClick={playSound}
+          size="small"
+          selectedLetters={selectedLetters}
+        />
 
         <div>
           <div className="button-wrapper">

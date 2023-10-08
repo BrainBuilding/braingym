@@ -1,18 +1,18 @@
 import { Outlet } from "react-router-dom";
 import { SubNavbar } from "components/SubNavbar";
-import { AlphabetStyled } from "./Alphabet.styles";
+import { LettersStyled } from "./Letters.styles";
 
-export const Alphabet = () => {
+export const Letters = () => {
   return (
-    <AlphabetStyled className="alphabet">
+    <LettersStyled className="letters">
       <SubNavbar
         items={[
           { to: "learn", children: "Learn" },
-          { to: "play", children: "Play" },
+          { to: "alphabet", children: "Alphabet" },
         ]}
       />
 
       <Outlet />
-    </AlphabetStyled>
+    </LettersStyled>
   );
 };

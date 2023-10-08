@@ -9,6 +9,7 @@ export const Letters = () => {
         items={[
           { to: "learn", children: "Learn" },
           { to: "alphabet", children: "Alphabet" },
+          { to: "vowels", children: "Vowels" },
         ]}
       />
 

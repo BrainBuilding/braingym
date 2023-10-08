@@ -8,6 +8,8 @@ export const letters: TLetter[] = [
       uppercase: "Ա",
       lowercase: "ա",
     },
+    isVowel: true,
+    hasOneSound: true,
   },
   {
     key: "b",
@@ -15,6 +17,8 @@ export const letters: TLetter[] = [
       uppercase: "Բ",
       lowercase: "բ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "g",
@@ -22,6 +26,8 @@ export const letters: TLetter[] = [
       uppercase: "Գ",
       lowercase: "գ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "d",
@@ -29,6 +35,8 @@ export const letters: TLetter[] = [
       uppercase: "Դ",
       lowercase: "դ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "y",
@@ -36,6 +44,8 @@ export const letters: TLetter[] = [
       uppercase: "Ե",
       lowercase: "ե",
     },
+    isVowel: true,
+    hasOneSound: false,
   },
   {
     key: "z",
@@ -43,6 +53,8 @@ export const letters: TLetter[] = [
       uppercase: "Զ",
       lowercase: "զ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "e",
@@ -50,6 +62,8 @@ export const letters: TLetter[] = [
       uppercase: "Է",
       lowercase: "է",
     },
+    isVowel: true,
+    hasOneSound: true,
   },
   {
     key: "ee",
@@ -57,6 +71,8 @@ export const letters: TLetter[] = [
       uppercase: "Ը",
       lowercase: "ը",
     },
+    isVowel: true,
+    hasOneSound: true,
   },
   {
     key: "th",
@@ -64,6 +80,8 @@ export const letters: TLetter[] = [
       uppercase: "Թ",
       lowercase: "թ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "j",
@@ -71,6 +89,8 @@ export const letters: TLetter[] = [
       uppercase: "Ժ",
       lowercase: "ժ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "i",
@@ -78,6 +98,8 @@ export const letters: TLetter[] = [
       uppercase: "Ի",
       lowercase: "ի",
     },
+    isVowel: true,
+    hasOneSound: true,
   },
   {
     key: "l",
@@ -85,6 +107,8 @@ export const letters: TLetter[] = [
       uppercase: "Լ",
       lowercase: "լ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "kh",
@@ -92,6 +116,8 @@ export const letters: TLetter[] = [
       uppercase: "Խ",
       lowercase: "խ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "ts",
@@ -99,6 +125,8 @@ export const letters: TLetter[] = [
       uppercase: "Ծ",
       lowercase: "ծ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "k",
@@ -106,6 +134,8 @@ export const letters: TLetter[] = [
       uppercase: "Կ",
       lowercase: "կ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "h",
@@ -113,6 +143,8 @@ export const letters: TLetter[] = [
       uppercase: "Հ",
       lowercase: "հ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "dz",
@@ -120,6 +152,8 @@ export const letters: TLetter[] = [
       uppercase: "Ձ",
       lowercase: "ձ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "gh",
@@ -127,6 +161,8 @@ export const letters: TLetter[] = [
       uppercase: "Ղ",
       lowercase: "ղ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "tsh",
@@ -134,6 +170,8 @@ export const letters: TLetter[] = [
       uppercase: "Ճ",
       lowercase: "ճ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "m",
@@ -141,6 +179,8 @@ export const letters: TLetter[] = [
       uppercase: "Մ",
       lowercase: "մ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "ye",
@@ -148,6 +188,8 @@ export const letters: TLetter[] = [
       uppercase: "Յ",
       lowercase: "յ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "n",
@@ -155,6 +197,8 @@ export const letters: TLetter[] = [
       uppercase: "Ն",
       lowercase: "ն",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "sh",
@@ -162,6 +206,8 @@ export const letters: TLetter[] = [
       uppercase: "Շ",
       lowercase: "շ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "v",
@@ -169,6 +215,8 @@ export const letters: TLetter[] = [
       uppercase: "Ո",
       lowercase: "ո",
     },
+    isVowel: true,
+    hasOneSound: false,
   },
   {
     key: "tch",
@@ -176,6 +224,8 @@ export const letters: TLetter[] = [
       uppercase: "Չ",
       lowercase: "չ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "p",
@@ -183,6 +233,8 @@ export const letters: TLetter[] = [
       uppercase: "Պ",
       lowercase: "պ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "dj",
@@ -190,6 +242,8 @@ export const letters: TLetter[] = [
       uppercase: "Ջ",
       lowercase: "ջ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "r",
@@ -197,6 +251,8 @@ export const letters: TLetter[] = [
       uppercase: "Ռ",
       lowercase: "ռ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "s",
@@ -204,6 +260,8 @@ export const letters: TLetter[] = [
       uppercase: "Ս",
       lowercase: "ս",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "ve",
@@ -211,6 +269,8 @@ export const letters: TLetter[] = [
       uppercase: "Վ",
       lowercase: "վ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "t",
@@ -218,6 +278,8 @@ export const letters: TLetter[] = [
       uppercase: "Տ",
       lowercase: "տ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "ze",
@@ -225,6 +287,8 @@ export const letters: TLetter[] = [
       uppercase: "Ր",
       lowercase: "ր",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "tse",
@@ -232,6 +296,8 @@ export const letters: TLetter[] = [
       uppercase: "Ց",
       lowercase: "ց",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "u",
@@ -239,6 +305,8 @@ export const letters: TLetter[] = [
       uppercase: "Ու",
       lowercase: "ու",
     },
+    isVowel: true,
+    hasOneSound: true,
   },
   {
     key: "ph",
@@ -246,6 +314,8 @@ export const letters: TLetter[] = [
       uppercase: "Փ",
       lowercase: "փ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "khe",
@@ -253,6 +323,8 @@ export const letters: TLetter[] = [
       uppercase: "Ք",
       lowercase: "ք",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
   {
     key: "yev",
@@ -260,6 +332,8 @@ export const letters: TLetter[] = [
       uppercase: "Եվ",
       lowercase: "և",
     },
+    isVowel: false,
+    hasOneSound: false,
   },
   {
     key: "o",
@@ -267,6 +341,8 @@ export const letters: TLetter[] = [
       uppercase: "Օ",
       lowercase: "օ",
     },
+    isVowel: true,
+    hasOneSound: true,
   },
   {
     key: "vee",
@@ -274,6 +350,8 @@ export const letters: TLetter[] = [
       uppercase: "Ֆ",
       lowercase: "ֆ",
     },
+    isVowel: false,
+    hasOneSound: true,
   },
 ];
 

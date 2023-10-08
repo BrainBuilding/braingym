@@ -10,6 +10,7 @@ import { LogIn } from "pages/LogIn";
 import { Letters } from "pages/Letters";
 import { LearnAlphabet } from "pages/Letters/pages/LearnAlphabet";
 import { PlayAlphabet } from "pages/Letters/pages/PlayAlphabet";
+import { Vowels } from "pages/Letters/pages/Vowels";
 
 function App() {
   return (
@@ -58,6 +59,14 @@ function App() {
                 element={
                   <Protected>
                     <PlayAlphabet />
+                  </Protected>
+                }
+              />
+              <Route
+                path="vowels"
+                element={
+                  <Protected>
+                    <Vowels />
                   </Protected>
                 }
               />

@@ -1,6 +1,7 @@
 import { letters as armenianLetters } from "shared/constants/alphabet/armenian";
 import { TLetter } from "shared/types";
 import { AlphabetBoardStyled } from "./AlphabetBoard.styles";
+import { useMemo } from "react";
 
 export type TBoardSize = "small" | "large";
 
@@ -22,13 +23,13 @@ export const AlphabetBoard: React.FC<TProps> = (props) => {
   console.log("size[log]::", size);
 
   return (
-    <AlphabetBoardStyled className={size}>
+    <AlphabetBoardStyled className={`alphabet-board ${size}`}>
       {letters.map((letter) => (
         <div
           key={letter.key}
           className={`square letter letter-${letter.key} ${
             selectedLetters.includes(letter.key) ? "selected" : ""
-          }`}
+          } ${letter.hasOneSound ? "has-one-sound" : "has-multiple-sound"}`}
           onClick={onClick?.(letter.key)}
         >
           {letter.value.uppercase} {letter.value.lowercase}

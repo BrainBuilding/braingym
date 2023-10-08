@@ -44,4 +44,6 @@ export type TLetter = {
     uppercase: string;
     lowercase: string;
   };
+  isVowel: boolean;
+  hasOneSound: boolean;
 };

@@ -63,7 +63,6 @@ export const PlayAlphabet = () => {
 
   return (
     <PlayAlphabetStyled>
-      <h1>PlayAlphabet</h1>
       <LevelAndPoints levelPoints={100} collectionName="PointsAlphabet" />
 
       <div>

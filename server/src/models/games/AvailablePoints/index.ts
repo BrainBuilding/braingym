@@ -43,7 +43,8 @@ class AvailablePoints {
     return await this.db.doc(this.getId({ uid })).set(
       {
         ...availablePoints,
-        points: availablePoints.points > 0 ? availablePoints.points - by : 0,
+        points:
+          availablePoints.points - by > 0 ? availablePoints.points - by : 0,
       },
       { merge: true }
     );

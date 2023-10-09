@@ -8,6 +8,7 @@ import { authMiddleWare } from "./middlewares/auth";
 import { ProfileDB } from "./models/Profile";
 import { userDetails } from "./controllers/UserDetails";
 import { alphabet } from "./controllers/games/Alphabet";
+import { vowels } from "./controllers/games/Vowels";
 
 const app = express();
 
@@ -74,6 +75,9 @@ io.on("connection", (socket) => {
 
   alphabet.setSocket(socket);
   socket.on("play/alphabet", alphabet.startTheGame);
+
+  vowels.setSocket(socket);
+  socket.on("play/vowels", vowels.startTheGame);
 
   socket.on("disconnect", () => {
     console.log("disconnected");

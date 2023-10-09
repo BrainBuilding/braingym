@@ -38,6 +38,10 @@ export type TGameAlphabetChallenge = {
   letter: string;
 };
 
+export type TGameVowelsChallenge = {
+  letter: string;
+};
+
 export type TLetter = {
   key: string;
   value: {

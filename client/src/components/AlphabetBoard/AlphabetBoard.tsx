@@ -1,7 +1,6 @@
 import { letters as armenianLetters } from "shared/constants/alphabet/armenian";
 import { TLetter } from "shared/types";
 import { AlphabetBoardStyled } from "./AlphabetBoard.styles";
-import { useMemo } from "react";
 
 export type TBoardSize = "small" | "large";
 
@@ -19,8 +18,6 @@ export const AlphabetBoard: React.FC<TProps> = (props) => {
     size = "large",
     letters = armenianLetters,
   } = props;
-
-  console.log("size[log]::", size);
 
   return (
     <AlphabetBoardStyled className={`alphabet-board ${size}`}>

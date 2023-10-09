@@ -3,6 +3,11 @@ import { colors, spaces } from "styles";
 
 export const VowelsStyled = styled.div`
   padding: ${spaces.lg};
+  height: calc(100vh - 100px);
+  background-image: url(/images/fly-1.png);
+  background-repeat: no-repeat;
+  background-size: 30vw;
+  background-position: bottom left;
 
   .alphabet-board {
     margin-top: ${spaces.md};
@@ -11,6 +16,10 @@ export const VowelsStyled = styled.div`
       background-color: ${colors.grayXLight};
       pointer-events: none;
     }
+  }
+
+  .button-wrapper {
+    margin-top: ${spaces.lg};
   }
 
   .buttons-wrapper {

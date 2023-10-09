@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { TGameAlphabetChallenge, TSocketRes } from "shared/types";
+import { TSocketRes } from "shared/types";
 
 type TProps = {
   time: number; // seconds
-  onTimeOff: React.Dispatch<
-    React.SetStateAction<TSocketRes<TGameAlphabetChallenge> | undefined>
-  >;
+  onTimeOff: React.Dispatch<React.SetStateAction<TSocketRes<any> | undefined>>;
 };
 
 export const Timer: React.FC<TProps> = ({ time, onTimeOff }) => {

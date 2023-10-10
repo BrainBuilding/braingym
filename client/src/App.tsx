@@ -1,4 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import "./translations/config";
 
 import ChatContainer from "components/ChatContainer";
 import { AuthContextProvider } from "context/AuthContext";
@@ -12,6 +14,8 @@ import { PlayAlphabet } from "pages/Letters/pages/PlayAlphabet";
 import { Vowels } from "pages/Letters/pages/Vowels";
 
 function App() {
+  const { t } = useTranslation();
+
   return (
     <>
       <Emoji />
@@ -70,7 +74,7 @@ function App() {
         </>
       </AuthContextProvider>
 
-      <div className="developed-by">Developed by Narek & Hayk & Maya</div>
+      <div className="developed-by">{t("developedBy")}</div>
     </>
   );
 }

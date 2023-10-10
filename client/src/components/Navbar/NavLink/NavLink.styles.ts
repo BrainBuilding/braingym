@@ -2,9 +2,10 @@ import styled from "styled-components";
 import { colors, fontSizes, spaces } from "styles";
 
 export const NavLinkStyled = styled.div`
-  width: 60px;
+  min-width: 60px;
   height: 100%;
   background: ${colors.main};
+  padding: 0 ${spaces.sm};
 
   &:hover {
     background: ${colors.secondary};

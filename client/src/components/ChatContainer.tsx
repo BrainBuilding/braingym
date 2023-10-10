@@ -8,6 +8,7 @@ import {
   onSnapshot,
   orderBy,
 } from "firebase/firestore";
+import { useTranslation } from "react-i18next";
 import { fireDB } from "configs/firebaseConfig";
 import { socketio } from "configs/socket";
 import { UserAuth } from "context/AuthContext";
@@ -18,6 +19,7 @@ import { InputText } from "./InputText";
 export default function ChatContainer() {
   const [chats, setChats] = useState<TChatData[]>([]);
   const { user } = UserAuth();
+  const { t } = useTranslation();
   const chatsRef = useMemo(() => collection(fireDB, "Messages"), []);
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
   const scrollToBottom = () => {
@@ -119,7 +121,7 @@ export default function ChatContainer() {
           }}
         >
           <h4>
-            <>Username: {user?.first_name}</>
+            {t("user")}: {user?.first_name}
           </h4>
         </div>
         <ChatsList />

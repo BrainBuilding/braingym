@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { SocketApi } from "socket";
 import { LevelAndPoints } from "components/LevelAndPoints";
 import { AlphabetBoard } from "components/AlphabetBoard";
@@ -17,6 +18,7 @@ export const Vowels = () => {
   >();
 
   const { user } = UserAuth();
+  const { t } = useTranslation();
   const playSound = usePlaySound();
   const vowels = useVowels();
 
@@ -71,7 +73,7 @@ export const Vowels = () => {
         />
 
         <div className="button-wrapper">
-          <Button onClick={onPlay}>Play</Button>
+          <Button onClick={onPlay}>{t("button.play")}</Button>
         </div>
 
         {playGameSocketRes?.game?.gameId ? (
@@ -87,7 +89,7 @@ export const Vowels = () => {
                 color="secondary"
                 onClick={onAnswer(true)}
               >
-                Ձայնավոր
+                {t("vowel")}
               </Button>
 
               <Button
@@ -95,7 +97,7 @@ export const Vowels = () => {
                 hoverColor="roseDark"
                 onClick={onAnswer(false)}
               >
-                Բաղաձայն
+                {t("consonant")}
               </Button>
             </div>
           </>

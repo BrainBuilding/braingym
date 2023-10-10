@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Send from "@mui/icons-material/Send";
+import { Button } from "./Button";
 
 const styles = {
   button: {
@@ -47,9 +49,10 @@ export const InputText: React.FC<Props> = ({ addMessage }) => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       ></textarea>
-      <button onClick={() => addAMessage()} style={styles.button}>
-        ENTER
-      </button>
+
+      <Button onClick={() => addAMessage()}>
+        <Send />
+      </Button>
     </div>
   );
 };

@@ -1,0 +1,18 @@
+{
+  "navigation": {
+    "chat": "Chat",
+    "account": "Account",
+    "letters": "Letters",
+    "alphabet": "Alphabet",
+    "vowels": "Vowels"
+  },
+  "button": {
+    "play": "Play",
+    "logout": "Logout"
+  },
+  "level": "Level",
+  "developedBy": "Developed by Narek & Hayk & Maya",
+  "user": "User",
+  "vowel": "Vowel",
+  "consonant": "Consonant"
+}

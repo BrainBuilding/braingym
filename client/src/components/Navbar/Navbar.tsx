@@ -1,4 +1,5 @@
 import Logout from "@mui/icons-material/Logout";
+import { useTranslation } from "react-i18next";
 import { Logo } from "components/Logo";
 import { NavLink } from "components/Navbar/NavLink";
 import { UserAuth } from "context/AuthContext";
@@ -7,6 +8,7 @@ import { Avatar } from "components/Avatar";
 
 export const Navbar = () => {
   const { user, logOut } = UserAuth();
+  const { t } = useTranslation();
 
   const handleSignOut = async () => {
     try {
@@ -23,16 +25,16 @@ export const Navbar = () => {
       {user && (
         <div className="nav-bar-buttons">
           <div className="buttons-wrapper">
-            <NavLink to="/">Chat</NavLink>
-            <NavLink to="/account">Account</NavLink>
-            <NavLink to="/letters">Letters</NavLink>
+            <NavLink to="/">{t("navigation.chat")}</NavLink>
+            <NavLink to="/account">{t("navigation.account")}</NavLink>
+            <NavLink to="/letters">{t("navigation.letters")}</NavLink>
           </div>
 
           <div className="buttons-wrapper user-buttons-wrapper">
             <Avatar user={user} />
 
             <button
-              title="Logout"
+              title={t("button.logout")}
               className="log-out-button"
               onClick={handleSignOut}
             >

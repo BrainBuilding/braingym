@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { SocketApi } from "socket";
 import { letters } from "shared/constants/alphabet/armenian";
 import { Button } from "components/Button";
@@ -24,6 +25,7 @@ export const PlayAlphabet = () => {
   >();
 
   const { user } = UserAuth();
+  const { t } = useTranslation();
   const playSound = usePlaySound();
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export const PlayAlphabet = () => {
 
         <div>
           <div className="button-wrapper">
-            <Button onClick={onPlay}>Play</Button>
+            <Button onClick={onPlay}>{t("button.play")}</Button>
           </div>
 
           <div>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import Star from "@mui/icons-material/Star";
 import { LevelAndPointsStyled } from "./LevelAndPoints.styles";
 import { ProgressBar } from "../ProgressBar";
@@ -11,6 +12,7 @@ type TProps = {
 
 export const LevelAndPoints: React.FC<TProps> = (props) => {
   const { collectionName, levelPoints } = props;
+  const { t } = useTranslation();
 
   const { level, currentPoints } = useGetLevelAndPoints({
     collectionName,
@@ -19,7 +21,7 @@ export const LevelAndPoints: React.FC<TProps> = (props) => {
 
   return (
     <LevelAndPointsStyled className="level-and-points">
-      <div className="label">Level</div>
+      <div className="label">{t("level")}</div>
       <div className="current-level">{level}</div>
       <ProgressBar value={currentPoints} ofValue={levelPoints} />
       <Star htmlColor={colors.yellow} />

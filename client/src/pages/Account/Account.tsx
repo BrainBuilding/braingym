@@ -1,4 +1,5 @@
 import { UserAuth } from "context/AuthContext";
+import { Language } from "./Language";
 
 export const Account = () => {
   const { user } = UserAuth();
@@ -20,6 +21,10 @@ export const Account = () => {
           style={{ width: 100, height: 100 }}
           src={user.picture}
         />
+      </div>
+
+      <div>
+        <Language />
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
+import { localStore } from "utils";
 import en from "./en/index.json";
 import hy from "./hy/index.json";
 
 i18next.use(initReactI18next).init({
-  lng: "hy", // if you're using a language detector, do not define the lng option
+  lng: localStore.getData("language") || "hy",
   debug: true,
   resources: {
     en: {

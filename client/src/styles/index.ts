@@ -13,6 +13,11 @@ export const colors = {
   text: "#3a3a3a",
 };
 
+export const backgroundColors = {
+  color1: "#ceeefd",
+  color2: "#60bdc4"
+}
+
 export const spaces = {
   xs: "3px",
   sm: "6px",

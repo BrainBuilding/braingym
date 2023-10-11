@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import { colors } from "styles";
+import { backgroundColors, colors } from "styles";
 
-const color1 = "#ceeefd";
-const color2 = "#60bdc4";
 
 export const LogInStyled = styled.div`
   height: 100%;
@@ -18,16 +16,16 @@ export const LogInStyled = styled.div`
     z-index: -1;
     background: repeating-linear-gradient(
       -45deg,
-      ${color1} 0%,
-      ${color1} 20%,
-      ${color2} 20%,
-      ${color2} 40%,
-      ${color1} 40%,
-      ${color1} 60%,
-      ${color2} 60%,
-      ${color2} 80%,
-      ${color1} 80%,
-      ${color1} 100%
+      ${backgroundColors.color1} 0%,
+      ${backgroundColors.color1} 20%,
+      ${backgroundColors.color2} 20%,
+      ${backgroundColors.color2} 40%,
+      ${backgroundColors.color1} 40%,
+      ${backgroundColors.color1} 60%,
+      ${backgroundColors.color2} 60%,
+      ${backgroundColors.color2} 80%,
+      ${backgroundColors.color1} 80%,
+      ${backgroundColors.color1} 100%
     );
   }
 

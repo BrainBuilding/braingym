@@ -17,7 +17,7 @@ export const Navbar = () => {
         <div className="nav-bar-buttons">
           <div className="buttons-wrapper">
             <NavLink to="/tops">{t("navigation.tops")}</NavLink>
-            <NavLink to="/letters">{t("navigation.letters")}</NavLink>
+            <NavLink to="/">{t("navigation.chat")}</NavLink>
             <NavLink to="/letters">{t("navigation.letters")}</NavLink>
           </div>
 

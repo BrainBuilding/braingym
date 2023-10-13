@@ -11,6 +11,11 @@ export type TUser = {
   school: string;
 };
 
+export type TPoints = {
+  authUid: string;
+  points: number;
+};
+
 export type TSocketReq<T extends unknown> = {
   token: string;
   user: TUser;

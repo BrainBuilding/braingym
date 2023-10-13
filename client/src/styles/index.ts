@@ -1,4 +1,6 @@
 export const colors = {
+  blueXLight: "#e7f3fe",
+  blueLight: "#b7dcfb",
   main: "#3da2f3",
   secondary: "#2d679e",
   white: "#fff",
@@ -15,8 +17,8 @@ export const colors = {
 
 export const backgroundColors = {
   color1: "#ceeefd",
-  color2: "#60bdc4"
-}
+  color2: "#60bdc4",
+};
 
 export const spaces = {
   xs: "3px",

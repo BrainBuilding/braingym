@@ -12,6 +12,7 @@ import { LogIn } from "pages/LogIn";
 import { Letters } from "pages/Letters";
 import { PlayAlphabet } from "pages/Letters/pages/PlayAlphabet";
 import { Vowels } from "pages/Letters/pages/Vowels";
+import { Tops } from "pages/Tops";
 
 function App() {
   const { t } = useTranslation();
@@ -32,6 +33,14 @@ function App() {
               }
             />
             <Route path="/log-in" element={<LogIn />} />
+            <Route
+              path="/tops"
+              element={
+                <Protected>
+                  <Tops />
+                </Protected>
+              }
+            />
             <Route
               path="/account"
               element={

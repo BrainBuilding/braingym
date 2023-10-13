@@ -21,8 +21,4 @@ export const NavbarStyled = styled.div`
       justify-content: flex-end;
     }
   }
-
-  .logo {
-    height: 100%;
-  }
 `;

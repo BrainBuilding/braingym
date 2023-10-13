@@ -1,10 +1,15 @@
+import { LogoStyled } from "./Logo.styles";
+
 export const Logo = () => {
   return (
-    <img
-      referrerPolicy="no-referrer"
-      className="logo"
-      src="/images/logo.png"
-      alt=""
-    />
+    <LogoStyled>
+      <img
+        referrerPolicy="no-referrer"
+        className="logo"
+        src="/logo192.png"
+        alt=""
+      />
+      <span>Mosaic</span>
+    </LogoStyled>
   );
 };

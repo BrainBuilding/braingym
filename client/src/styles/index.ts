@@ -1,8 +1,9 @@
 export const colors = {
+  compMain: "#f08080",
   blueXLight: "#e7f3fe",
   blueLight: "#b7dcfb",
-  main: "#3da2f3",
-  secondary: "#2d679e",
+  main: "#634988",
+  secondary: "#725b93",
   white: "#fff",
   rose: "#f76d6a",
   roseDark: "#d74d4a",
@@ -13,6 +14,7 @@ export const colors = {
   grayLight: "#787878",
   grayXLight: "#a5a5a5",
   text: "#3a3a3a",
+  black: "#000000",
 };
 
 export const backgroundColors = {

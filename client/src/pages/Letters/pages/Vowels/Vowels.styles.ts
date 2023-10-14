@@ -6,7 +6,7 @@ export const VowelsStyled = styled.div`
   height: calc(100vh - 100px);
   background-image: url(/images/fly-1.png);
   background-repeat: no-repeat;
-  background-size: 30vw;
+  background-size: min(30vw, 30vh);
   background-position: bottom left;
 
   .alphabet-board {

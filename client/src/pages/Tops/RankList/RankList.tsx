@@ -12,7 +12,6 @@ export const RankList: React.FC<TProps> = (props) => {
   const { profiles, gameName, gameKey } = props;
 
   const sortedProfiles = orderBy(profiles, gameKey, "desc");
-  console.log("profiles[log]::", profiles);
 
   return (
     <RankListStyled>

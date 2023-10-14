@@ -16,6 +16,9 @@ export class SocketApi {
   static off = (event: string, listener: (data: any) => any) =>
     socketio.off(event, listener);
 
+  static removeAllListeners = (event: string) =>
+    socketio.removeAllListeners(event);
+
   static emit = (event: string, data?: any) => {
     return socketio.emit(event, {
       token: getToken(),

@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { Socket } from "socket.io";
-import shuffle from 'lodash/shuffle';
+import shuffle from "lodash/shuffle";
 import { DefaultEventsMap } from "socket.io/dist/typed-events";
 import {
   getRandomElementsFromArray,
@@ -62,14 +62,10 @@ class Alphabet {
     return { gameData, answer: randomLetter };
   };
 
-  socketOffIn = (
-    socketActionPath: string,
-    listener: (...args: any[]) => void,
-    timeoutSeconds: number
-  ) =>
+  socketOffIn = (socketActionPath: string, timeoutSeconds: number) =>
     setTimeout(() => {
       this.socket.emit(socketActionPath, { off: true });
-      this.socket.off(socketActionPath, listener);
+      this.socket.removeAllListeners(socketActionPath);
       console.log(`Stopped listening to ${socketActionPath} due to timeout.`);
     }, timeoutSeconds * 1000);
 
@@ -94,7 +90,8 @@ class Alphabet {
     });
 
     this.socket.emit(gameId, isAnswerCorrect);
-    this.socket.off(gameId, this.gamesMap.get(gameId));
+    this.socket.removeAllListeners(gameId);
+    this.gamesMap.delete(gameId);
 
     this.startTheGame(req);
   };
@@ -116,11 +113,7 @@ class Alphabet {
       this.gamesMap.get(gameData.game.gameId)
     );
 
-    this.socketOffIn(
-      gameData.game.gameId,
-      this.gamesMap.get(gameData.game.gameId),
-      gameData.game.time
-    );
+    this.socketOffIn(gameData.game.gameId, gameData.game.time);
   };
 }
 

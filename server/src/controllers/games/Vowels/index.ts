@@ -15,6 +15,7 @@ import {
 import { PointsVowelsDB } from "../../../models/games/PointsVowels";
 import { EarnedPointsDB } from "../../../models/games/EarnedPoints";
 import { letters } from "../../../shared/constants/alphabet/armenian";
+import remove from "lodash/remove";
 
 class Vowels {
   socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>;
@@ -57,14 +58,10 @@ class Vowels {
     return { gameData, answer: randomLetter.isVowel };
   };
 
-  socketOffIn = (
-    socketActionPath: string,
-    listener: (...args: any[]) => void,
-    timeoutSeconds: number
-  ) =>
+  socketOffIn = (socketActionPath: string, timeoutSeconds: number) =>
     setTimeout(() => {
       this.socket.emit(socketActionPath, { off: true });
-      this.socket.off(socketActionPath, listener);
+      this.socket.removeAllListeners(socketActionPath);
       console.log(`Stopped listening to ${socketActionPath} due to timeout.`);
     }, timeoutSeconds * 1000);
 
@@ -91,7 +88,8 @@ class Vowels {
     });
 
     this.socket.emit(gameId, isAnswerCorrect);
-    this.socket.off(gameId, this.gamesMap.get(gameId));
+    this.socket.removeAllListeners(gameId);
+    this.gamesMap.delete(gameId);
 
     this.startTheGame(req);
   };
@@ -113,11 +111,7 @@ class Vowels {
       this.gamesMap.get(gameData.game.gameId)
     );
 
-    this.socketOffIn(
-      gameData.game.gameId,
-      this.gamesMap.get(gameData.game.gameId),
-      gameData.game.time
-    );
+    this.socketOffIn(gameData.game.gameId, gameData.game.time);
   };
 }
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { isBoolean } from "lodash";
 import { useTranslation } from "react-i18next";
 import { SocketApi } from "socket";
 import { LevelAndPoints } from "components/LevelAndPoints";
@@ -56,7 +57,11 @@ export const Vowels = () => {
       } as TSocketAnswer<boolean>);
 
       SocketApi.on(playGameSocketRes?.game?.gameId, (isCorrect: boolean) => {
-        showEmoji(isCorrect ? "😍" : "😔");
+        if (isBoolean(isCorrect)) {
+          showEmoji(isCorrect ? "😍" : "😔");
+        }
+
+        SocketApi.removeAllListeners(playGameSocketRes?.game?.gameId!);
       });
     }
   };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { isBoolean } from "lodash";
 import { useTranslation } from "react-i18next";
 import { SocketApi } from "socket";
 import { letters } from "shared/constants/alphabet/armenian";
@@ -63,6 +64,23 @@ export const PlayAlphabet = () => {
 
   const selectedLetters = useActiveLetters();
 
+  const onAnswer = (letterKey: string) => () => {
+    if (playGameSocketRes?.game?.gameId) {
+      SocketApi.emit(playGameSocketRes?.game?.gameId, {
+        authUid: user?.authUid,
+        answer: letterKey,
+      } as TSocketAnswer<string>);
+
+      SocketApi.on(playGameSocketRes?.game?.gameId, (isCorrect: boolean) => {
+        if (isBoolean(isCorrect)) {
+          showEmoji(isCorrect ? "😍" : "😔");
+        }
+
+        SocketApi.removeAllListeners(playGameSocketRes?.game?.gameId!);
+      });
+    }
+  };
+
   return (
     <PlayAlphabetStyled>
       <LevelAndPoints levelPoints={100} collectionName="PointsAlphabet" />
@@ -89,21 +107,7 @@ export const PlayAlphabet = () => {
                 />
                 <AlphabetBoard
                   size="small"
-                  onClick={(letterKey) => () => {
-                    if (playGameSocketRes?.game?.gameId) {
-                      SocketApi.emit(playGameSocketRes?.game?.gameId, {
-                        authUid: user?.authUid,
-                        answer: letterKey,
-                      } as TSocketAnswer<string>);
-
-                      SocketApi.on(
-                        playGameSocketRes?.game?.gameId,
-                        (isCorrect: boolean) => {
-                          showEmoji(isCorrect ? "😍" : "😔");
-                        }
-                      );
-                    }
-                  }}
+                  onClick={onAnswer}
                   letters={challengeLetters}
                 />
               </>

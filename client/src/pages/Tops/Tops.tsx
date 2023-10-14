@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs, query } from "firebase/firestore";
-import { TopsStyled } from "./Tops.styles";
-import { fireDB } from "configs/firebaseConfig";
+import { useTranslation } from "react-i18next";
 import { keyBy } from "lodash";
+import { collection, getDocs, query } from "firebase/firestore";
+import { fireDB } from "configs/firebaseConfig";
+import { Loader } from "components/Loader";
 import { TUser } from "shared/types";
 import { fetchPoints } from "./Tops.utils";
 import { RankList } from "./RankList";
-import { useTranslation } from "react-i18next";
+import { TopsStyled } from "./Tops.styles";
 
 export type TProfileWithPoints = TUser & {
   pointsAlphabet: number;
@@ -48,6 +49,10 @@ export const Tops = () => {
 
     fetchData();
   }, []);
+
+  if (!profiles.length) {
+    return <Loader />;
+  }
 
   return (
     <TopsStyled>

@@ -1,5 +1,6 @@
 import isEqual from 'lodash/isEqual';
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 type TFormData = {
   firstName: string;
@@ -23,6 +24,10 @@ export const AccountForm = () => {
   const [formData, setFormData] = useState<TFormData>({
     ...initalData
   });
+
+  const { t } = useTranslation()
+
+
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -60,7 +65,7 @@ export const AccountForm = () => {
       <div>
         <input
           type="text"
-          placeholder="First Name"
+          placeholder={t("firstName")}
           name="firstName"
           value={formData.firstName}
           onChange={handleChange}
@@ -70,7 +75,7 @@ export const AccountForm = () => {
       <div>
         <input
           type="text"
-          placeholder="Last Name"
+          placeholder={t("lastName")}
           name="lastName"
           value={formData.lastName}
           onChange={handleChange}
@@ -80,7 +85,7 @@ export const AccountForm = () => {
       <div>
         <input
           type="number"
-          placeholder="Age"
+          placeholder={t("age")}
           min={0}
           name="age"
           value={formData.age}
@@ -91,7 +96,7 @@ export const AccountForm = () => {
       <div>
         <input
           type="text"
-          placeholder="School"
+          placeholder={t("school")}
           name="school"
           value={formData.school}
           onChange={handleChange}
@@ -101,7 +106,7 @@ export const AccountForm = () => {
       <div>
         <input
           type="text"
-          placeholder="City"
+          placeholder={t("city")}
           name="city"
           value={formData.city}
           onChange={handleChange}
@@ -111,14 +116,14 @@ export const AccountForm = () => {
       <div>
         <input
           type="email"
-          placeholder="Email"
+          placeholder={t("email")}
           name="email"
           value={formData.email}
           onChange={handleChange}
         />
       </div>
 
-      <button disabled={!isValid || !isFormChanged} type="submit">Submit</button>
+      <button disabled={!isValid || !isFormChanged} type="submit">{t("save")}</button>
     </form>
   );
 };

@@ -16,5 +16,12 @@
   "user": "User",
   "vowel": "Vowel",
   "language": "Language",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "age": "Age",
+  "school": "School",
+  "city": "City",
+  "email": "Email",
+  "save": "Save",
   "consonant": "Consonant"
 }

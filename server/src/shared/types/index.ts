@@ -4,6 +4,7 @@ export type TUser = {
   country: string;
   email: string;
   first_name: string;
+  age?: number;
   id: string;
   last_name: string;
   locale: string;

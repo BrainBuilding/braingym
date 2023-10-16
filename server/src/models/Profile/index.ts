@@ -1,4 +1,5 @@
 import { admin } from "../../config/firebase.config";
+import { TUser } from "../../shared/types";
 
 class Profile {
   db = admin.firestore().collection("Profiles");
@@ -27,8 +28,6 @@ class Profile {
       school: "",
     };
 
-    console.log("Creating profile  authUid::", uid);
-
     return await this.db.add(profileData);
   }
 
@@ -41,6 +40,31 @@ class Profile {
     } else {
       return profileRes;
     }
+  }
+
+  async updateProfile(uid: string, profile: TUser) {
+    const profileRes = await this.getProfile(uid);
+
+    const querySnapshot = await this.db.where("authUid", "==", uid).get();
+
+    for (const profileDoc of querySnapshot.docs) {
+      const profileRef = this.db.doc(profileDoc.id);
+
+      const profileData = {
+        ...profileRes,
+        first_name: profile.first_name,
+        last_name: profile.last_name,
+        picture: profile.picture,
+        country: profile.country,
+        city: profile.city,
+        age: +profile.age,
+        school: profile.school,
+      };
+
+      await profileRef.update(profileData);
+    }
+
+    return await this.getProfile(uid);
   }
 }
 

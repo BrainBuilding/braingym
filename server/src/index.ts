@@ -47,6 +47,13 @@ app.post("/api/profiles", async function (req, res) {
   res.send(JSON.stringify(dbRes));
 });
 
+app.put("/api/profiles", async function (req, res) {
+  const data = req.body;
+  const dbRes = await ProfileDB.updateProfile(data.uid, data.profile);
+
+  res.send(JSON.stringify(dbRes));
+});
+
 app.get("/api/*", async function (req, res) {
   res.status(200).send(
     JSON.stringify({

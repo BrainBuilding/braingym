@@ -20,6 +20,7 @@
   "lastName": "Last Name",
   "age": "Age",
   "school": "School",
+  "country": "Country",
   "city": "City",
   "email": "Email",
   "save": "Save",

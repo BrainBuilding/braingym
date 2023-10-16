@@ -1,33 +1,19 @@
-import isEqual from 'lodash/isEqual';
-import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useState, ChangeEvent, FormEvent } from "react";
+import isEqual from "lodash/isEqual";
+import { useTranslation } from "react-i18next";
+import { UserAuth } from "context/AuthContext";
+import { TUser } from "shared/types";
+import { api } from "api";
 
-type TFormData = {
-  firstName: string;
-  lastName: string;
-  age: string | number;
-  school: string;
-  city: string;
-  email: string;
-}
-
-const initalData = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  age: '',
-  school: '',
-  city: '',
-}
+type TFormData = TUser;
 
 export const AccountForm = () => {
+  const { user, setUser } = UserAuth();
   const [formData, setFormData] = useState<TFormData>({
-    ...initalData
+    ...(user as TUser),
   });
 
-  const { t } = useTranslation()
-
-
+  const { t } = useTranslation();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -37,25 +23,31 @@ export const AccountForm = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(formData);
+    api.put("profiles", {
+      profile: formData,
+      uid: user?.authUid,
+    });
+
+    setUser(formData);
   };
 
   const validate = () => {
     const isValid = !!(
-      formData.firstName &&
-      formData.lastName &&
+      formData.first_name &&
+      formData.last_name &&
       formData.email &&
       formData.age &&
       formData.school &&
+      formData.country &&
       formData.city
-    )
+    );
 
-    return isValid
-  }
+    return isValid;
+  };
 
   const checkFormChanges = () => {
-    return !isEqual(formData, initalData)
-  }
+    return !isEqual(formData, user);
+  };
 
   const isValid = validate();
   const isFormChanged = checkFormChanges();
@@ -66,8 +58,8 @@ export const AccountForm = () => {
         <input
           type="text"
           placeholder={t("firstName")}
-          name="firstName"
-          value={formData.firstName}
+          name="first_name"
+          value={formData.first_name}
           onChange={handleChange}
         />
       </div>
@@ -76,8 +68,8 @@ export const AccountForm = () => {
         <input
           type="text"
           placeholder={t("lastName")}
-          name="lastName"
-          value={formData.lastName}
+          name="last_name"
+          value={formData.last_name}
           onChange={handleChange}
         />
       </div>
@@ -115,6 +107,16 @@ export const AccountForm = () => {
 
       <div>
         <input
+          type="text"
+          placeholder={t("country")}
+          name="country"
+          value={formData.country}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div>
+        <input
           type="email"
           placeholder={t("email")}
           name="email"
@@ -123,7 +125,9 @@ export const AccountForm = () => {
         />
       </div>
 
-      <button disabled={!isValid || !isFormChanged} type="submit">{t("save")}</button>
+      <button disabled={!isValid || !isFormChanged} type="submit">
+        {t("save")}
+      </button>
     </form>
   );
 };

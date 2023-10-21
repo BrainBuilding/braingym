@@ -6,12 +6,13 @@ type TProps = {
   disabled?: boolean;
   color?: TColors;
   hoverColor?: TColors;
+  textColor?: TColors;
 };
 
 export const ButtonStyled = styled.div<TProps>`
   width: 100px;
   background: ${({ color }) => colors[color as TColors] || colors.main};
-  color: ${colors.white};
+  color: ${({ textColor }) => colors[textColor as TColors] || colors.white};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "")};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   height: 30px;

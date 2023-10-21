@@ -1,5 +1,6 @@
 import express from "express";
 import http from "http";
+import bodyParser from "body-parser";
 
 import { Server } from "socket.io";
 import path from "path";
@@ -20,7 +21,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 app.use(authMiddleWare.decodeToken);
-app.use(express.json());
+app.use(bodyParser.json({ limit: "2mb" }));
 
 const server = http.createServer(app);
 const io = new Server(server, {

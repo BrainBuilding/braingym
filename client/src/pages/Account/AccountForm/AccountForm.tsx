@@ -117,6 +117,7 @@ export const AccountForm = () => {
 
       <div>
         <input
+          disabled
           type="email"
           placeholder={t("email")}
           name="email"

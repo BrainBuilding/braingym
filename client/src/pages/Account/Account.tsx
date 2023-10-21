@@ -1,8 +1,9 @@
 import { UserAuth } from "context/AuthContext";
+import { EditableAvatar } from "components/EditableAvatar";
+
 import { Language } from "./Language";
 import { AccountStyled } from "./Account.styles";
 import { AccountForm } from "./AccountForm";
-
 
 export const Account = () => {
   const { user } = UserAuth();
@@ -14,14 +15,11 @@ export const Account = () => {
   return (
     <AccountStyled>
       <div className="form-div">
-        <p>{user.first_name} {user.last_name}</p>
+        <p>
+          {user.first_name} {user.last_name}
+        </p>
 
-        <img
-          referrerPolicy="no-referrer"
-          alt="Profile"
-          style={{ width: 100, height: 100 }}
-          src={user.picture}
-        />
+        <EditableAvatar src={user.picture} />
 
         <Language />
 

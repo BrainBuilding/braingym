@@ -50,15 +50,14 @@ class Profile {
     for (const profileDoc of querySnapshot.docs) {
       const profileRef = this.db.doc(profileDoc.id);
 
-      const profileData = {
+      const mergedData = {
         ...profileRes,
-        first_name: profile.first_name,
-        last_name: profile.last_name,
-        picture: profile.picture,
-        country: profile.country,
-        city: profile.city,
+        ...profile,
+      };
+
+      const profileData = {
+        ...mergedData,
         age: +profile.age,
-        school: profile.school,
       };
 
       await profileRef.update(profileData);

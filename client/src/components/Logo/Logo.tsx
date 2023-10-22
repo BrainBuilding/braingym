@@ -14,7 +14,7 @@ export const Logo = () => {
           alt=""
         />
       </div>
-      <span>{t("mosaic")}</span>
+      <span>{t("bzez")}</span>
     </LogoStyled>
   );
 };

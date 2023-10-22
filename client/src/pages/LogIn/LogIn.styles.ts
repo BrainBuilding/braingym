@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { backgroundColors, colors } from "styles";
 
-
 export const LogInStyled = styled.div`
   height: 100%;
   position: relative;
   overflow: hidden;
+  z-index: 10;
 
   .background-wrapper {
     height: 200%;

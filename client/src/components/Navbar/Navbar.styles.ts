@@ -19,6 +19,7 @@ export const NavbarStyled = styled.div`
 
     .user-buttons-wrapper {
       justify-content: flex-end;
+      max-width: 100px;
     }
   }
 `;

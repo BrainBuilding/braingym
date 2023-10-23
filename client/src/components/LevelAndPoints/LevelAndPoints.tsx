@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import Star from "@mui/icons-material/Star";
+import times from "lodash/times";
 import { LevelAndPointsStyled } from "./LevelAndPoints.styles";
 import { ProgressBar } from "../ProgressBar";
 import { colors } from "../../styles";
@@ -21,10 +22,19 @@ export const LevelAndPoints: React.FC<TProps> = (props) => {
 
   return (
     <LevelAndPointsStyled className="level-and-points">
-      <div className="label">{t("level")}</div>
-      <div className="current-level">{level}</div>
+      <div className="level-info-wrapper">
+        <div className="label">{t("level")}</div>
+
+        <div className="current-level">{level}</div>
+
+        <div className="starts-wrapper">
+          {times(level, () => (
+            <Star htmlColor={colors.yellow} />
+          ))}
+        </div>
+      </div>
+
       <ProgressBar value={currentPoints} ofValue={levelPoints} />
-      <Star htmlColor={colors.yellow} />
     </LevelAndPointsStyled>
   );
 };

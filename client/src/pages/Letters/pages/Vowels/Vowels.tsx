@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { isBoolean } from "lodash";
 import { useTranslation } from "react-i18next";
 import { SocketApi } from "socket";
+import { lettersMap } from "shared/constants/alphabet/armenian";
 import { LevelAndPoints } from "components/LevelAndPoints";
 import { AlphabetBoard } from "components/AlphabetBoard";
 import { Button } from "components/Button";
@@ -66,6 +67,9 @@ export const Vowels = () => {
     }
   };
 
+  const challengeLetter =
+    lettersMap[playGameSocketRes?.game?.data.challenge.letter as string];
+
   return (
     <VowelsStyled>
       <LevelAndPoints levelPoints={50} collectionName="PointsVowels" />
@@ -96,6 +100,22 @@ export const Vowels = () => {
               >
                 {t("vowel")}
               </Button>
+
+              <div
+                className="challenge-letter-wrapper"
+                onClick={() => playSound(challengeLetter.key)()}
+              >
+                <div className="challenge-letter">
+                  {
+                    lettersMap[playGameSocketRes?.game?.data.challenge.letter]
+                      .value.uppercase
+                  }{" "}
+                  {
+                    lettersMap[playGameSocketRes?.game?.data.challenge.letter]
+                      .value.uppercase
+                  }
+                </div>
+              </div>
 
               <Button
                 color="rose"

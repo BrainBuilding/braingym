@@ -4,7 +4,7 @@ import { colors, fontSizes, spaces } from "styles";
 export const LevelAndPointsStyled = styled.div`
   display: flex;
   width: 100%;
-  align-items: center;
+  flex-direction: column;
   max-width: 300px;
 
   .label {
@@ -13,9 +13,17 @@ export const LevelAndPointsStyled = styled.div`
     margin-right: ${spaces.sm};
   }
 
+  .level-info-wrapper {
+    display: flex;
+  }
+
   .current-level {
     font-size: ${fontSizes.xl};
     color: ${colors.yellow};
     margin-right: ${spaces.sm};
+  }
+
+  .starts-wrapper {
+    display: flex;
   }
 `;

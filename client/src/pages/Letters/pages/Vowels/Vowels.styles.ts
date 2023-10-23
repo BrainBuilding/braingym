@@ -9,6 +9,10 @@ export const VowelsStyled = styled.div`
   background-size: min(30vw, 30vh);
   background-position: bottom left;
 
+  .level-and-points {
+    margin-bottom: ${spaces.xl};
+  }
+
   .alphabet-board {
     margin-top: ${spaces.md};
 
@@ -27,10 +31,26 @@ export const VowelsStyled = styled.div`
     flex-direction: row;
     margin-top: ${spaces.lg};
     justify-content: center;
+    align-items: center;
 
     .button {
       &:not(:last-child) {
         margin-right: ${spaces.lg};
+      }
+    }
+
+    .challenge-letter-wrapper {
+      margin-right: ${spaces.lg};
+      width: 50px;
+      aspect-ratio: 1;
+      background: ${colors.green};
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+
+      .challenge-letter {
+        color: ${colors.white};
       }
     }
   }

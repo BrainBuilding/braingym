@@ -2,7 +2,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./translations/config";
 
-import ChatContainer from "components/ChatContainer";
 import { AuthContextProvider } from "context/AuthContext";
 import { Navbar } from "components/Navbar";
 import { Emoji } from "components/Emoji";
@@ -28,7 +27,7 @@ function App() {
               path="/"
               element={
                 <Protected>
-                  <ChatContainer />
+                  <Account />
                 </Protected>
               }
             />

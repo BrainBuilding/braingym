@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { MilitaryTech, SportsEsports } from "@mui/icons-material";
 import { Logo } from "components/Logo";
 import { NavLink } from "components/Navbar/NavLink";
 import { UserAuth } from "context/AuthContext";
@@ -7,7 +7,6 @@ import { AvatarMenu } from "./AvatarMenu";
 
 export const Navbar = () => {
   const { user } = UserAuth();
-  const { t } = useTranslation();
 
   return (
     <NavbarStyled className="nav-bar">
@@ -16,8 +15,13 @@ export const Navbar = () => {
       {user && (
         <div className="nav-bar-buttons">
           <div className="buttons-wrapper">
-            <NavLink to="/tops">{t("navigation.tops")}</NavLink>
-            <NavLink to="/letters">{t("navigation.letters")}</NavLink>
+            <NavLink to="/tops">
+              <MilitaryTech />
+            </NavLink>
+
+            <NavLink to="/letters">
+              <SportsEsports />
+            </NavLink>
           </div>
 
           <div className="buttons-wrapper user-buttons-wrapper">

@@ -15,6 +15,10 @@ export const NavbarStyled = styled.div`
 
     .buttons-wrapper {
       display: flex;
+
+      svg {
+        transform: scale(1.3);
+      }
     }
 
     .user-buttons-wrapper {

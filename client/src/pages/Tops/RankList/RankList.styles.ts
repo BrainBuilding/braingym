@@ -7,6 +7,7 @@ export const RankListStyled = styled.div`
   .game-name {
     font-size: ${fontSizes.xl};
     margin-bottom: ${spaces.lg};
+    padding-left: ${spaces.lg};
   }
 
   .rank-list {
@@ -15,6 +16,7 @@ export const RankListStyled = styled.div`
       height: 40px;
       align-items: center;
       background: ${colors.blueLight};
+      padding: ${spaces.lg};
 
       &:nth-child(odd) {
         background: ${colors.blueXLight};

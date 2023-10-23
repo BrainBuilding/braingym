@@ -3,7 +3,7 @@ import { colors, spaces } from "styles";
 
 export const VowelsStyled = styled.div`
   padding: ${spaces.lg};
-  height: calc(100vh - 100px);
+  flex-grow: 1;
   background-image: url(/images/fly-1.png);
   background-repeat: no-repeat;
   background-size: min(30vw, 30vh);

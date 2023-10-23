@@ -50,7 +50,7 @@ export const Tops = () => {
     fetchData();
   }, []);
 
-  if (!profiles.length || true) {
+  if (!profiles.length) {
     return <Loader />;
   }
 

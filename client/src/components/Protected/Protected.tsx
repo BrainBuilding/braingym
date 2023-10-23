@@ -8,7 +8,7 @@ type Props = React.FC<React.PropsWithChildren<unknown>>;
 export const Protected: Props = (props) => {
   const { children } = props;
   const { user, isAuthCheckPending } = UserAuth();
-  if (isAuthCheckPending) {
+  if (isAuthCheckPending || true) {
     return <Loader />;
   }
 

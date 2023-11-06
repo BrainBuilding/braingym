@@ -33,6 +33,10 @@ export const RankListStyled = styled.div`
 
       .rank-position {
         max-width: 20px;
+
+        img {
+          width: 100%;
+        }
       }
 
       .points {
